@@ -81,7 +81,6 @@ public class Study {
 						}while(k<study.length & a==false);		
 					}
 				break;
-			
 		}
 		
 	}

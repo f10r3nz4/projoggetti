@@ -9,7 +9,7 @@ public abstract class Erasmus {
 	private int subject_area;
 	private int total_credits;
 	private int special_needs;
-	private boolean prev_partecipation;
+	private char prev_partecipation;
 	private Study study;
 	private Placement placement;
 	private Language language;
@@ -77,11 +77,11 @@ public abstract class Erasmus {
 		this.special_needs = special_needs;
 	}
 
-	public boolean isPrev_partecipation() {
+	public char getPrev_partecipation() {
 		return prev_partecipation;
 	}
 
-	public void setPrev_partecipation(boolean prev_partecipation) {
+	public void setPrev_partecipation(char prev_partecipation) {
 		this.prev_partecipation = prev_partecipation;
 	}
 
@@ -162,8 +162,7 @@ public abstract class Erasmus {
 				s+=j;
 				j=erasmus.length-s;
 				System.out.println("?:"+j);
-				break;
-				
+				break;			
 		}
 	}
 	
