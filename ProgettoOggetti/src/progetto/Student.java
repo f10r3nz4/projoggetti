@@ -3,7 +3,7 @@ package progetto;
 import java.util.Arrays;
 import java.util.Vector;
 
-public class Student extends Institute{
+public class Student{
 	private String ID;
 	private String nationality;
 	private String study_level;
