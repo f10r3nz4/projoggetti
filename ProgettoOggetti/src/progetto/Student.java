@@ -72,6 +72,8 @@ public class Student extends Erasmus{
 		this.gender = gender;
 	}
 	
+	//effettuiamo un controllo sull'attributo String richiesto dall'utente in modo da proseguire con il conteggio
+	
 	public String ControlloString(String request){
 		switch(request) {
 		case "ID":
@@ -99,13 +101,16 @@ public class Student extends Erasmus{
 		}
 	}
 	
+	//il metodo effettua il conteggio delle parole dell'attributo, viene richiamato dal main
+	
 	public void count2(Student student[], String request) {
-		int j=0;
+		int j;
 		Vector<String> done= new Vector<String>();
 		String value;
 		boolean a=true;
 		value=student[0].ControlloString(request);
 		while(a){
+			j=0;
 			for(int i=0; i<student.length;i++) {
 				if(student[i].ControlloString(request).equals(value))
 					j++;
@@ -113,15 +118,17 @@ public class Student extends Erasmus{
 			System.out.println(value+":"+j);
 			done.add(value);
 			a=false;
-			int k=0;
+			int j=0;
 			do {
-				if(!done.contains(student[k].ControlloString(request)))
+				if(!done.contains(student[j].ControlloString(request)))
 					a=true;
 				else
-					k++;
-			}while(k<student.length & a==false);		
+					j++;
+			}while(j<student.length & a==false);		
 		}
 	}
+	
+	//effettuiamo un controllo sull'attributo Char richiesto dall'utente in modo da proseguire con il conteggio
 	
 	public char ControlloChar(String request){
 		switch(request) {
@@ -134,14 +141,17 @@ public class Student extends Erasmus{
 		case "size":
 			return super.getPlacement().getSize();
 	}
+		
+	//il metodo effettua il conteggio dei valori dell'attributo, viene richiamato dal main
 	
 	public void countChar(Student student[], String request) {
-		int j=0;
+		int j;
 		Vector<char> done= new Vector<char>();
 		String value;
 		boolean a=true;
 		value=student[0].ControlloChar(request);
 		while(a){
+			j=0;
 			for(int i=0; i<student.length;i++) {
 				if(student[i].ControlloChar(request).equals(value))
 					j++;
@@ -149,18 +159,18 @@ public class Student extends Erasmus{
 			System.out.println(value+":"+j);
 			done.add(value);
 			a=false;
-			int k=0;
+			int j=0;
 			do {
-				if(!done.contains(student[k].ControlloChar(request)))
+				if(!done.contains(student[j].ControlloChar(request)))
 					a=true;
 				else
-					k++;
-			}while(k<student.length & a==false);		
+					j++;
+			}while(j<student.length & a==false);		
 		}
 	}
 //Metodo per stringhe	
 //Variante 1 di count(stampa tutti i valori conteggiati di tutti gli attributi)
-	public void countString(String request, Student[] student) {
+/*	public void countString(String request, Student[] student) {
 		
 		int j=0;
 		Vector<String> done= new Vector<String>();
@@ -271,10 +281,10 @@ public class Student extends Erasmus{
 						j++;
 				}
 				System.out.println("Nationality "+value+":"+j);
-				break;*/
+				break;
 		}
 	}
-	//Variante 2 del count(prende tutti i valori di un attributo e poi li mette sul main per conteggiarne uno)
+	/* Variante 2 del count(prende tutti i valori di un attributo e poi li mette sul main per conteggiarne uno)
 	public Vector<String> find (String request, Student[] student) {
 		switch(request) {
 			case "ID":
@@ -310,8 +320,10 @@ public class Student extends Erasmus{
 			default: break;
 		}
 	}
+	*/
 	
-	//metodi per i numeri
+	
+	//metodi per i valori numerici
 	public void countNum(){
 		
 	}
