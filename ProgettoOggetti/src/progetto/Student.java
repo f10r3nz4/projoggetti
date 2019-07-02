@@ -114,28 +114,29 @@ public class Student extends Erasmus{
 			System.out.println("Y:"+j);
 			j=student.length-j;
 			System.out.println("N:"+j);
-			return;
 		}
-		Vector<String> done= new Vector<String>();
-		String value;
-		boolean a=true;
-		value=student[0].controlloString(request);
-		while(a){
-			j=0;
-			for(int i=0; i<student.length;i++) {
-				if(student[i].controlloString(request).equals(value))
-					j++;
+		else{
+			Vector<String> done= new Vector<String>();
+			String value;
+			boolean a=true;
+			value=student[0].controlloString(request);
+			while(a){
+				j=0;
+				for(int i=0; i<student.length;i++) {
+					if(student[i].controlloString(request).equals(value))
+						j++;
+				}
+				System.out.println(value+":"+j);
+				done.add(value);
+				a=false;
+				j=0;
+				do {
+					if(!done.contains(student[j].controlloString(request)))
+						a=true;
+					else
+						j++;
+				}while(j<student.length & a==false);		
 			}
-			System.out.println(value+":"+j);
-			done.add(value);
-			a=false;
-			j=0;
-			do {
-				if(!done.contains(student[j].controlloString(request)))
-					a=true;
-				else
-					j++;
-			}while(j<student.length & a==false);		
 		}
 	}
 	
