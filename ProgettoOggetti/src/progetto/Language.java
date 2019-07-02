@@ -10,6 +10,7 @@ public class Language {
 		this.language = language;
 		this.lang_preparation = lang_preparation;
 		this.lang_taught = lang_taught;
+		
 	}
 
 	public String getLanguage() {

@@ -163,6 +163,7 @@ public abstract class Erasmus {
 				j=erasmus.length-s;
 				System.out.println("?:"+j);
 				break;
+				
 		}
 	}
 	

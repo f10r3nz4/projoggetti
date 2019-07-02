@@ -23,6 +23,7 @@ public class Placement {
 		this.grant = grant;
 		this.size = size;
 		this.length = length;
+		
 	}
 
 	public String getEnterprise() {

@@ -347,6 +347,7 @@ public class Student extends Erasmus{
 			return super.getPlacement().getCredits();
 		case "grant_placement":
 			return super.getPlacement().getGrant();
+			
 		}
 	}
 	
