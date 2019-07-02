@@ -71,10 +71,97 @@ public class Student extends Erasmus{
 	public void setGender(char gender) {
 		this.gender = gender;
 	}
-
+	
+	public String ControlloString(String request){
+		switch(request) {
+		case "ID":
+				return this.getID();
+		case "nationality":
+				return this.getNationality();
+		case "study_level":
+				return this.getStudy_level();
+		case "consortium":
+				return super.getConsortium();
+		case "start_study":
+				return super.getStudy().getStart();
+		case "enterprise":
+			return super.getPlacement().getEnterprise();
+		case "country":
+			return super.getPlacement().getCountry();
+		case "sector":
+			return super.getPlacement().getSector();
+		case "start_placement":
+			return super.getPlacement().getStart();
+		case "language":
+			return super.getLanguage().getLanguage();
+		case "lang_preparation":
+			return super.getLanguage().getLang_preparation();
+		}
+	}
+	
+	public void count2(Student student[], String request) {
+		int j=0;
+		Vector<String> done= new Vector<String>();
+		String value;
+		boolean a=true;
+		value=student[0].ControlloString(request);
+		while(a){
+			for(int i=0; i<student.length;i++) {
+				if(student[i].ControlloString(request).equals(value))
+					j++;
+			}
+			System.out.println(value+":"+j);
+			done.add(value);
+			a=false;
+			int k=0;
+			do {
+				if(!done.contains(student[k].ControlloString(request)))
+					a=true;
+				else
+					k++;
+			}while(k<student.length & a==false);		
+		}
+	}
+	
+	public char ControlloChar(String request){
+		switch(request) {
+		case "gender":
+				return this.getGender();
+		case "mob_type":
+				return super.getMob_type();
+		case "sh_duration":
+				return super.getSh_duration();
+		case "size":
+			return super.getPlacement().getSize();
+	}
+	
+	public void countChar(Student student[], String request) {
+		int j=0;
+		Vector<char> done= new Vector<char>();
+		String value;
+		boolean a=true;
+		value=student[0].ControlloChar(request);
+		while(a){
+			for(int i=0; i<student.length;i++) {
+				if(student[i].ControlloChar(request).equals(value))
+					j++;
+			}
+			System.out.println(value+":"+j);
+			done.add(value);
+			a=false;
+			int k=0;
+			do {
+				if(!done.contains(student[k].ControlloChar(request)))
+					a=true;
+				else
+					k++;
+			}while(k<student.length & a==false);		
+		}
+	}
 //Metodo per stringhe	
 //Variante 1 di count(stampa tutti i valori conteggiati di tutti gli attributi)
 	public void countString(String request, Student[] student) {
+		
 		int j=0;
 		Vector<String> done= new Vector<String>();
 		String value;
