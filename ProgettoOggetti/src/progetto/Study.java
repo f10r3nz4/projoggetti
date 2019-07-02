@@ -2,13 +2,13 @@ package progetto;
 
 import java.util.Vector;
 
-public class Study extends Institute{
+public class Study {
 	private String start;
 	private float length;
 	private float grant;
 	private int credits;
 	
-	public Study(String start, float length, float grant, int credits, String code, String country) {
+	public Study(String start, float length, float grant, int credits) {
 		super(code,country);
 		this.start = start;
 		this.length = length;
@@ -81,44 +81,7 @@ public class Study extends Institute{
 						}while(k<study.length & a==false);		
 					}
 				break;
-			case "code":
-				value=study[0].getStudy().getCode();
-				while(a){
-					for(int i=0; i<study.length;i++) {
-						if(study[i].getStudy().getCode().equals(value))
-							j++;
-					}
-					System.out.println(value+":"+j);
-					done.add(value);
-					a=false;
-					int k=0;
-					do {
-						if(!done.contains(study[k].getStudy().getCode()))
-							a=true;
-						else
-							k++;
-					}while(k<study.length & a==false);		
-				}
-			break;
-			case "country":
-				value=study[0].getStudy().getCountry();
-				while(a){
-					for(int i=0; i<study.length;i++) {
-						if(study[i].getStudy().getCountry().equals(value))
-							j++;
-					}
-					System.out.println(value+":"+j);
-					done.add(value);
-					a=false;
-					int k=0;
-					do {
-						if(!done.contains(study[k].getStudy().getCountry()))
-							a=true;
-						else
-							k++;
-					}while(k<study.length & a==false);		
-				}
-			break;
+			
 		}
 		
 	}
