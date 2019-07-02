@@ -7,19 +7,19 @@ public class Placement {
 	private String country;
 	private String sector;
 	private String start;
-	private int credit;
+	private int credits;
 	private int grant;
 	private char size;
 	private float length;
 	
-	public Placement(String enterprise, String country, String sector, String start, int credit, int grant, char size,
+	public Placement(String enterprise, String country, String sector, String start, int credits, int grant, char size,
 			float length) {
 		super();
 		this.enterprise = enterprise;
 		this.country = country;
 		this.sector = sector;
 		this.start = start;
-		this.credit = credit;
+		this.credits = credits;
 		this.grant = grant;
 		this.size = size;
 		this.length = length;
@@ -57,12 +57,12 @@ public class Placement {
 		this.start = start;
 	}
 
-	public int getCredit() {
-		return credit;
+	public int getCredits() {
+		return credits;
 	}
 
-	public void setCredit(int credit) {
-		this.credit = credit;
+	public void setCredits(int credits) {
+		this.credits = credits;
 	}
 
 	public int getGrant() {

@@ -7,21 +7,21 @@ public abstract class Erasmus {
 	private char mob_type;
 	private char sh_duration;
 	private int subject_area;
-	private int credits;
+	private int total_credits;
 	private int special_needs;
 	private boolean prev_partecipation;
 	private Study study;
 	private Placement placement;
 	private Language language;
 
-	public Erasmus(String consortium, char mob_type, char sh_duration, int subject_area, int credits, int special_needs,
+	public Erasmus(String consortium, char mob_type, char sh_duration, int subject_area, int total_credits, int special_needs,
 			boolean prev_partecipation, Study study, Placement placement, Language language) {
 		super();
 		this.consortium = consortium;
 		this.mob_type = mob_type;
 		this.sh_duration = sh_duration;
 		this.subject_area = subject_area;
-		this.credits = credits;
+		this.total_credits = total_credits;
 		this.special_needs = special_needs;
 		this.prev_partecipation = prev_partecipation;
 		this.study = study;
@@ -61,12 +61,12 @@ public abstract class Erasmus {
 		this.subject_area = subject_area;
 	}
 
-	public int getCredits() {
-		return credits;
+	public int getTotal_credits() {
+		return total_credits;
 	}
 
-	public void setCredits(int credits) {
-		this.credits = credits;
+	public void setTotal_credits(int total_credits) {
+		this.total_credits = total_credits;
 	}
 
 	public int getSpecial_needs() {

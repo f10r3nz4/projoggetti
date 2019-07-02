@@ -2,6 +2,7 @@ package progetto;
 
 import java.util.Arrays;
 import java.util.Vector;
+import java.math.*;
 
 public class Student extends Erasmus{
 	private String ID;
@@ -74,7 +75,7 @@ public class Student extends Erasmus{
 	
 	//effettuiamo un controllo sull'attributo String richiesto dall'utente in modo da proseguire con il conteggio
 	
-	public String ControlloString(String request){
+	public String controlloString(String request){
 		switch(request) {
 		case "ID":
 				return this.getID();
@@ -103,16 +104,16 @@ public class Student extends Erasmus{
 	
 	//il metodo effettua il conteggio delle parole dell'attributo, viene richiamato dal main
 	
-	public void count2(Student student[], String request) {
+	public void countString(Student student[], String request) {
 		int j;
 		Vector<String> done= new Vector<String>();
 		String value;
 		boolean a=true;
-		value=student[0].ControlloString(request);
+		value=student[0].controlloString(request);
 		while(a){
 			j=0;
 			for(int i=0; i<student.length;i++) {
-				if(student[i].ControlloString(request).equals(value))
+				if(student[i].controlloString(request).equals(value))
 					j++;
 			}
 			System.out.println(value+":"+j);
@@ -120,7 +121,7 @@ public class Student extends Erasmus{
 			a=false;
 			int j=0;
 			do {
-				if(!done.contains(student[j].ControlloString(request)))
+				if(!done.contains(student[j].controlloString(request)))
 					a=true;
 				else
 					j++;
@@ -130,7 +131,7 @@ public class Student extends Erasmus{
 	
 	//effettuiamo un controllo sull'attributo Char richiesto dall'utente in modo da proseguire con il conteggio
 	
-	public char ControlloChar(String request){
+	public char controlloChar(String request){
 		switch(request) {
 		case "gender":
 				return this.getGender();
@@ -140,6 +141,7 @@ public class Student extends Erasmus{
 				return super.getSh_duration();
 		case "size":
 			return super.getPlacement().getSize();
+		}
 	}
 		
 	//il metodo effettua il conteggio dei valori dell'attributo, viene richiamato dal main
@@ -149,11 +151,11 @@ public class Student extends Erasmus{
 		Vector<char> done= new Vector<char>();
 		String value;
 		boolean a=true;
-		value=student[0].ControlloChar(request);
+		value=student[0].controlloChar(request);
 		while(a){
 			j=0;
 			for(int i=0; i<student.length;i++) {
-				if(student[i].ControlloChar(request).equals(value))
+				if(student[i].controlloChar(request).equals(value))
 					j++;
 			}
 			System.out.println(value+":"+j);
@@ -161,7 +163,7 @@ public class Student extends Erasmus{
 			a=false;
 			int j=0;
 			do {
-				if(!done.contains(student[j].ControlloChar(request)))
+				if(!done.contains(student[j].controlloChar(request)))
 					a=true;
 				else
 					j++;
@@ -322,28 +324,80 @@ public class Student extends Erasmus{
 	}
 	*/
 	
-	
 	//metodi per i valori numerici
-	public void countNum(){
-		
+	public double controlInt(String request){
+		switch(request) {
+		case "age":
+				return this.getAge();
+		case "n_years":
+				return this.getN_years();
+		case "subject_area":  
+				return super.getSubject_area();
+		case "total_credits":
+			return super.getTotal_credits();
+		case "length_study":
+			return super.getStudy().getLength();	
+		case "credits_study":
+			return super.getStudy().getCredits();
+		case "grant_study":
+			return super.getStudy().getGrant();
+		case "length_placement":
+			return super.getPlacement().getLength();
+		case "credits_placement":
+			return super.getPlacement().getCredits();
+		case "grant_placement":
+			return super.getPlacement().getGrant();
+		}
 	}
 	
-	public void sum(String res) {
+	public int countNum(String request,Student[] student){
+		int j=0;
+		for(int i=0; i<student.length;i++) {
+			if(student[i].controlInt(request) != 0)
+				j++;
+		}
+		return j;
 	}
 	
-	public void max() {
-		
+	public int sum(String request,Student[] student) {
+		int j=0;
+		for(int i=0; i<student.length;i++) {
+				j+=student[i].controlInt(request);
+		}
+		return j;
 	}
 	
-	public void min() {
-		
+	public double max(String request,Student[] student) {
+		double max=student[0].controlInt(request);
+		for(int i=1;i<this.countNum(request, student);i++) {
+			if(student[i].controlInt(request)>max)
+				max=student[i].controlInt(request);
+		}
+		return max;
 	}
 	
-	public void avg() {
-		
+	public double min(String request,Student[] student) {
+		double min=student[0].controlInt(request);
+		for(int i=1;i<this.countNum(request, student);i++) {
+			if(student[i].controlInt(request)<min)
+				min=student[i].controlInt(request);
+		}
+		return min;
 	}
 	
-	public void dev_std() {
+	public float avg(String request,Student[] student) {
+		int sum=this.sum(request,student);
+		int count=this.countNum(request,student);
+		return sum/count;
+	}
+	
+	public double dev_std(String request,Student[] student) {
+		float avg=this.avg(request, student);
+		int count=this.countNum(request, student);
+		int diff=0;
+		for(int i=0;i<count;i++)
+			diff+=Math.pow(student[i].controlInt(request)-avg,2);
+		return Math.sqrt(diff/count);	
 		
 	}
 	
