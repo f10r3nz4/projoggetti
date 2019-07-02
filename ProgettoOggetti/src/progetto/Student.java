@@ -10,16 +10,18 @@ public class Student extends Erasmus{
 	private int age;
 	private int n_years;
 	private char gender;
-	
-	public Student(String code, String country, String iD, String nationality, String study_level, int age, int n_years,
-			char gender) {
-		this.ID = iD;
+
+	public Student(String consortium, char mob_type, char sh_duration, int subject_area, int credits, int special_needs,
+			boolean prev_partecipation, Study study, Placement placement, Language language, String iD,
+			String nationality, String study_level, int age, int n_years, char gender) {
+		super(consortium, mob_type, sh_duration, subject_area, credits, special_needs, prev_partecipation, study,
+				placement, language);
+		ID = iD;
 		this.nationality = nationality;
 		this.study_level = study_level;
 		this.age = age;
 		this.n_years = n_years;
 		this.gender = gender;
-		super()
 	}
 
 	public String getID() {
