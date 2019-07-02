@@ -2,7 +2,7 @@ package progetto;
 
 import java.util.Vector;
 
-public class Erasmus {
+public abstract class Erasmus {
 	private String consortium;
 	private char mob_type;
 	private char sh_duration;

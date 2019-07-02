@@ -3,25 +3,23 @@ package progetto;
 import java.util.Arrays;
 import java.util.Vector;
 
-public class Student{
+public class Student extends Erasmus{
 	private String ID;
 	private String nationality;
 	private String study_level;
 	private int age;
 	private int n_years;
 	private char gender;
-	private Erasmus[] erasmus_experiences;
 	
 	public Student(String code, String country, String iD, String nationality, String study_level, int age, int n_years,
-			char gender, Erasmus[] erasmus_experiences) {
-		super(code, country);
+			char gender) {
 		this.ID = iD;
 		this.nationality = nationality;
 		this.study_level = study_level;
 		this.age = age;
 		this.n_years = n_years;
 		this.gender = gender;
-		this.erasmus_experiences = erasmus_experiences;
+		super()
 	}
 
 	public String getID() {
@@ -72,15 +70,8 @@ public class Student{
 		this.gender = gender;
 	}
 
-	public Erasmus[] getErasmus_experiences() {
-		return erasmus_experiences;
-	}
-
-	public void setErasmus_experiences(Erasmus[] erasmus_experiences) {
-		this.erasmus_experiences = erasmus_experiences;
-	}
 //Metodo per stringhe	
-//Variante 1 di count(stampa tutti i valori contggiati di tutti gli attributi)
+//Variante 1 di count(stampa tutti i valori conteggiati di tutti gli attributi)
 	public void countString(String request, Student[] student) {
 		int j=0;
 		Vector<String> done= new Vector<String>();
@@ -254,10 +245,6 @@ public class Student{
 	public void dev_std() {
 		
 	}
-	@Override
-	public String toString() {
-		return "Student [ID=" + ID + ", nationality=" + nationality + ", study_level=" + study_level + ", age=" + age
-				+ ", n_years=" + n_years + ", gender=" + gender + ", erasmus_experiences="
-				+ Arrays.toString(erasmus_experiences) + "]";
-	}
+	
+	
 }
