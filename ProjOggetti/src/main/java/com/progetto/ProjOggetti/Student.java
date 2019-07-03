@@ -169,7 +169,7 @@ public class Student extends Erasmus{
 		return super.getLanguageLang_preparation();
 	}
 	
-	public boolean getLang_taught() {
+	public char getLang_taught() {
 		return super.getLanguageLang_taught();
 	}
 	

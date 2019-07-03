@@ -174,8 +174,8 @@ public abstract class Erasmus {
 		return this.getLanguage().getLang_preparation();
 	}
 	
-	public boolean getLanguageLang_taught() {
-		return this.getLanguage().isLang_taught();
+	public char getLanguageLang_taught() {
+		return this.getLanguage().getLang_taught();
 	}
 
 	public String getInstituteHome_code() {

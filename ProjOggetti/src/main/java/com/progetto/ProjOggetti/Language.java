@@ -29,7 +29,7 @@ public class Language {
 		this.lang_preparation = lang_preparation;
 	}
 
-	public char isLang_taught() {
+	public char getLang_taught() {
 		return lang_taught;
 	}
 
