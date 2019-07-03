@@ -1,5 +1,6 @@
 package com.progetto.ProjOggetti;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.math.*;
@@ -149,7 +150,7 @@ public class Student extends Erasmus{
 		return super.getPlacementLength();
 	}
 
-	public String getLanguage() {
+	public String getLanguagelanguage() {
 		return super.getLanguageLanguage();
 	}
 	
@@ -184,9 +185,8 @@ public class Student extends Erasmus{
 	public void countString(Student student[], String request) {
 		int j=0;
 		HashMap<String,Integer> done=new HashMap<String,Integer>();
-		boolean a=true;
-		for(Student item : student) {
-			try {
+		try {
+			for(Student item : student) {
 				Method m=item.getClass().getMethod("get"+request.substring(0, 1).toUpperCase()+request.substring(1));
 				String value=m.invoke(item).toString();
 				j=0;
@@ -198,13 +198,19 @@ public class Student extends Erasmus{
 				String string=value.toString();
 				done.put(string,j);		
 			}
-			catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (NoSuchMethodException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		} catch (SecurityException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}
+		catch(InvocationTargetException e) {
 			e.printStackTrace();
-			} catch (SecurityException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (IllegalAccessException e) {
 			e.printStackTrace();
-			}
 		}
 	}
 	
@@ -279,75 +285,112 @@ public class Student extends Erasmus{
 	
 	public int countNum(String request,Student[] student){
 		int j=0;
-		for(Student students : student) {
-			try {
-				Method m=students.getClass().getMethod("get"+request.substring(0, 1).toUpperCase()+request.substring(1),null);
+		try {
+			for(Student students : student) {
+			
+				Method m=students.getClass().getMethod("get"+request.substring(0, 1).toUpperCase()+request.substring(1));
 				if(m.invoke(students).hashCode()!=0)
 					j++;
-				return j;
 			}
-			catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		}
+		catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch(InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		finally {
+			return j;
 		}
 	}
 	
 	public int sum(String request,Student[] student) {
 		int j=0;
-		for(Student students: student) {
-			try {
-				Method m=students.getClass().getMethod("get"+request.substring(0, 1).toUpperCase()+request.substring(1),null);
+		try {
+			for(Student students: student) {			
+				Method m=students.getClass().getMethod("get"+request.substring(0, 1).toUpperCase()+request.substring(1));
 				Object a=m.invoke(students);
 				j+=a.hashCode();
-				return j;
 			}
-			catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		}
+		catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch(InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		finally {
+			return j;
 		}
 	}
 	
 	public double max(String request,Student[] student) {
-		for(Student students: student) {	
-			try {
-				Method m=students.getClass().getMethod("get"+request.substring(0, 1).toUpperCase()+request.substring(1),null);
-				double max=m.invoke(students).hashCode();
+		double max=0;
+		try {
+			for(Student students: student) {	
+				Method m=students.getClass().getMethod("get"+request.substring(0, 1).toUpperCase()+request.substring(1));
+				max=m.invoke(students).hashCode();
 				if(m.invoke(students).hashCode()>max)
 					max=m.invoke(students).hashCode();
-				return max;
-			}catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+		}
+		catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch(InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		finally {
+			return max;
 		}
 	}
 	
 	public double min(String request,Student[] student) {
-		for(Student students: student) {	
-			try {
-				Method m=students.getClass().getMethod("get"+request.substring(0, 1).toUpperCase()+request.substring(1),null);
-				double min=m.invoke(students).hashCode();
+		double min=0;
+		try {
+			for(Student students: student) {	
+				Method m=students.getClass().getMethod("get"+request.substring(0, 1).toUpperCase()+request.substring(1));
+				min=m.invoke(students).hashCode();
 				if(m.invoke(students).hashCode()<min)
 					min=m.invoke(students).hashCode();
-				return min;
-			}catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+		}
+		catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch(InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		finally {
+			return min;
 		}
 	}
 	
@@ -360,19 +403,30 @@ public class Student extends Erasmus{
 	public double dev_std(String request,Student[] student) {
 		float avg=this.avg(request, student);
 		int count=this.countNum(request, student);
-		for(Student students : student)
+		int diff=0;
 		try {
-			Method m=students.getClass().getMethod("get"+request.substring(0, 1).toUpperCase()+request.substring(1),null);
-			int diff=0;
-			for(int i=0;i<count;i++)
-				diff+=Math.pow(m.invoke(students).hashCode()-avg,2);
-			return Math.sqrt(diff/count);	
+			for(Student students : student) {
+				Method m=students.getClass().getMethod("get"+request.substring(0, 1).toUpperCase()+request.substring(1));
+					diff+=Math.pow(m.invoke(students).hashCode()-avg,2);	
+			}
 		}catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		catch(InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		finally {
+			if(diff!=0)
+				return Math.sqrt(diff/count);
+			else
+				return diff;
 		}
 	}
 }
