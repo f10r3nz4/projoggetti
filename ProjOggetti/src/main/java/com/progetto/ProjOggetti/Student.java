@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.progetto.ProjOggetti;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
