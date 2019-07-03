@@ -3,9 +3,9 @@ package com.progetto.ProjOggetti;
 public class Language {
 	private String language;
 	private String lang_preparation;
-	private boolean lang_taught;
+	private char lang_taught;
 	
-	public Language(String language, String lang_preparation, boolean lang_taught) {
+	public Language(String language, String lang_preparation, char lang_taught) {
 		super();
 		this.language = language;
 		this.lang_preparation = lang_preparation;
@@ -29,11 +29,11 @@ public class Language {
 		this.lang_preparation = lang_preparation;
 	}
 
-	public boolean isLang_taught() {
+	public char isLang_taught() {
 		return lang_taught;
 	}
 
-	public void setLang_taught(boolean lang_taught) {
+	public void setLang_taught(char lang_taught) {
 		this.lang_taught = lang_taught;
 	}
 

@@ -3,22 +3,25 @@ package com.progetto.ProjOggetti;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.math.*;
+// import java.math.*;
 
 public class Student extends Erasmus{
 	private String ID;
+	private String mobility_code;
 	private String nationality;
 	private String study_level;
 	private int age;
 	private int n_years;
 	private char gender;
-	
+
 	public Student(String consortium, char mob_type, char sh_duration, int subject_area, int total_credits,
 			int special_needs, char prev_partecipation, Study study, Placement placement, Language language,
-			Institute institute, String iD, String nationality, String study_level, int age, int n_years, char gender) {
+			Institute institute, String iD, String mobility_code, String nationality, String study_level, int age,
+			int n_years, char gender) {
 		super(consortium, mob_type, sh_duration, subject_area, total_credits, special_needs, prev_partecipation, study,
 				placement, language, institute);
 		ID = iD;
+		this.mobility_code = mobility_code;
 		this.nationality = nationality;
 		this.study_level = study_level;
 		this.age = age;
@@ -28,6 +31,14 @@ public class Student extends Erasmus{
 
 	public String getID() {
 		return ID;
+	}
+	
+	public String getMobility_code() {
+		return mobility_code;
+	}
+
+	public void setMobility_code(String mobility_code) {
+		this.mobility_code = mobility_code;
 	}
 
 	public void setID(String iD) {
@@ -283,6 +294,7 @@ public class Student extends Erasmus{
 	}
 	*/
 	
+	@SuppressWarnings("finally")
 	public int countNum(String request,Student[] student){
 		int j=0;
 		try {
@@ -311,6 +323,7 @@ public class Student extends Erasmus{
 		}
 	}
 	
+	@SuppressWarnings("finally")
 	public int sum(String request,Student[] student) {
 		int j=0;
 		try {
@@ -338,6 +351,7 @@ public class Student extends Erasmus{
 		}
 	}
 	
+	@SuppressWarnings("finally")
 	public double max(String request,Student[] student) {
 		double max=0;
 		try {
@@ -366,6 +380,7 @@ public class Student extends Erasmus{
 		}
 	}
 	
+	@SuppressWarnings("finally")
 	public double min(String request,Student[] student) {
 		double min=0;
 		try {
@@ -400,6 +415,7 @@ public class Student extends Erasmus{
 		return sum/count;
 	}
 	
+	@SuppressWarnings("finally")
 	public double dev_std(String request,Student[] student) {
 		float avg=this.avg(request, student);
 		int count=this.countNum(request, student);
