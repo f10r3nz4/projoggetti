@@ -150,7 +150,7 @@ public class Student extends Erasmus{
 		return super.getPlacementLength();
 	}
 
-	public String getLanguage() {
+	public String getLanguagelanguage() {
 		return super.getLanguageLanguage();
 	}
 	
