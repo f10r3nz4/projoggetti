@@ -2,6 +2,7 @@ package com.progetto.ProjOggetti;
 
 import java.net.URI;
 import java.util.List;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,15 +21,19 @@ public class StudentController {
 	private StudentService studentService;
 	
 	
+	@GetMapping("/data/")
+	public List<Student> retriveAllData(@RequestParam(value="fieldName", defaultValue="") String fieldName) {
+		return studentService.retrieveDataStudent(fieldName);
+	}
+	
+	@GetMapping("/statistics/}")
+	public HashMap<String,Double> retrieveStatistics(@RequestParam String param) {
+		return studentService.retrieveStatistics(param);
+	}
 	
 	@GetMapping("/students/{studentId}/courses")
 	public List<Course> retrieveCoursesForStudent(@PathVariable String studentId) {
 		return studentService.retrieveCourses(studentId);
-	}
-	
-	@GetMapping("/data/")
-	public List<Student> retriveAllData(@RequestParam(value="fieldName", defaultValue="") String fieldName) {
-		return studentService.retrieveDataStudent(fieldName);
 	}
 
 	@PostMapping("/students/{studentId}/courses")

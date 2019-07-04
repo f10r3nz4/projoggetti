@@ -3,6 +3,7 @@ package com.progetto.ProjOggetti;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 // import java.math.*;
 
 public class Student extends Erasmus{
@@ -193,16 +194,17 @@ public class Student extends Erasmus{
 	
 	//il metodo effettua il conteggio delle parole dell'attributo, viene richiamato dal main
 	
-	public void countString(Student student[], String request) {
-		int j=0;
-		HashMap<String,Integer> done=new HashMap<String,Integer>();
+	@SuppressWarnings("finally")
+	public HashMap<String,Double> countString(List<Student> student, String request) {
+		double j=0;
+		HashMap<String,Double> done=new HashMap<>();
 		try {
 			for(Student item : student) {
 				Method m=item.getClass().getMethod("get"+request.substring(0, 1).toUpperCase()+request.substring(1));
 				String value=m.invoke(item).toString();
 				j=0;
-				for(int i=0; i<student.length;i++) {
-					if(m.invoke(item).toString()==value)
+				for(Student students : student) {
+					if(m.invoke(item).toString().equals(m.invoke(students).toString()))
 						j++;
 				}
 				System.out.println(value+":"+j);
@@ -222,6 +224,9 @@ public class Student extends Erasmus{
 		}
 		catch (IllegalAccessException e) {
 			e.printStackTrace();
+		}
+		finally {
+			return done;
 		}
 	}
 	
@@ -295,7 +300,7 @@ public class Student extends Erasmus{
 	*/
 	
 	@SuppressWarnings("finally")
-	public int countNum(String request,Student[] student){
+	public int countNum(List<Student> student,String request){
 		int j=0;
 		try {
 			for(Student students : student) {
@@ -324,7 +329,7 @@ public class Student extends Erasmus{
 	}
 	
 	@SuppressWarnings("finally")
-	public int sum(String request,Student[] student) {
+	public double sum(List<Student> student,String request) {
 		int j=0;
 		try {
 			for(Student students: student) {			
@@ -352,7 +357,7 @@ public class Student extends Erasmus{
 	}
 	
 	@SuppressWarnings("finally")
-	public double max(String request,Student[] student) {
+	public double max(List<Student> student,String request) {
 		double max=0;
 		try {
 			for(Student students: student) {	
@@ -381,7 +386,7 @@ public class Student extends Erasmus{
 	}
 	
 	@SuppressWarnings("finally")
-	public double min(String request,Student[] student) {
+	public double min(List<Student> student,String request) {
 		double min=0;
 		try {
 			for(Student students: student) {	
@@ -409,17 +414,17 @@ public class Student extends Erasmus{
 		}
 	}
 	
-	public float avg(String request,Student[] student) {
-		int sum=this.sum(request,student);
-		int count=this.countNum(request, student);
+	public double avg(List<Student> student,String request) {
+		double sum=this.sum(student,request);
+		int count=this.countNum(student,request);
 		return sum/count;
 	}
 	
 	@SuppressWarnings("finally")
-	public double dev_std(String request,Student[] student) {
-		float avg=this.avg(request, student);
-		int count=this.countNum(request, student);
-		int diff=0;
+	public double dev_std(List<Student> student,String request) {
+		double avg=this.avg(student,request);
+		int count=this.countNum(student,request);
+		double diff=0;
 		try {
 			for(Student students : student) {
 				Method m=students.getClass().getMethod("get"+request.substring(0, 1).toUpperCase()+request.substring(1));

@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.*;
+import java.util.HashMap;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -109,4 +110,30 @@ public class StudentService{
 	public List<Student> retrieveDataStudent(String fieldName){
         return StudentService.getStudents();
 	} 
+	
+	@SuppressWarnings("finally")
+	public HashMap<String,Double>retrieveStatistics(String param){
+		HashMap<String,Double> statistics = new HashMap<>();
+		try {
+		Method m = students.get(0).getClass().getMethod("get"+param.substring(0, 1).toUpperCase()+param.substring(1));
+		if(m.getReturnType().getName().equals("String")||m.getReturnType().getName().equals("char"))
+			return students.get(0).countString(students,param);
+		else
+			statistics.put("count",(double)students.get(0).countNum(students,param));
+			statistics.put("avg", students.get(0).avg(students,param));
+			statistics.put("min", students.get(0).min(students,param));
+			statistics.put("max", students.get(0).max(students,param));
+			statistics.put("std", students.get(0).dev_std(students,param));
+			statistics.put("sum", students.get(0).sum(students,param));
+		}catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return statistics;
+		}
+	}
 }
