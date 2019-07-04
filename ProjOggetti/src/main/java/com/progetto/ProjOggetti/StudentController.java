@@ -27,8 +27,8 @@ public class StudentController {
 	}
 	
 	@GetMapping("/data/")
-	public List<Course> retriveAllData(@RequestParam(value="fieldName", defaultValue="") String fieldName) {
-		return myService.retrieveData(fieldName);
+	public List<Student> retriveAllData(@RequestParam(value="fieldName", defaultValue="") String fieldName) {
+		return studentService.retrieveDataStudent(fieldName);
 	}
 
 	@PostMapping("/students/{studentId}/courses")

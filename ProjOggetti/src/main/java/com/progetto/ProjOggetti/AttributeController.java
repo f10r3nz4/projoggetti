@@ -21,6 +21,6 @@ public class AttributeController {
 	
 	@GetMapping("/metadata/")
 	public List<Attribute> retrieveData() {
-		return studentService.retrieveData();
+		return studentService.retrieveDataAttribute();
 	}
 }
