@@ -35,7 +35,7 @@ public class StudentService{
 	private static List<Student> students = new ArrayList<>();
 	private static List<Attribute> attributes = new ArrayList<>();
 	
-	
+//Stampa tutti i dati e permette di applicare filtri
 	@SuppressWarnings("finally")
 	public List<Student> getStudents(String param) {
 		if(param.isEmpty())
@@ -44,27 +44,28 @@ public class StudentService{
 			return doFilter(students,param);
 		}
 	}
-
+//Restituisce la lista delle intestazioni della tabella
 	public static List<Attribute> getAttributes() {
 		return attributes;
 	}
-
+//Parsing del file scaricato
 	static {
-		
-		String fileToParse = "SM_2012_13_20141103_01.csv";
+	//Prendo il file dove effettuare il parsing e inizializzo un BufferedReader
+		String fileToParse = "dati-erasmus.csv";
 		BufferedReader fileReader = null;
 		
-		//Delimiter used in CSV file
+	//Definisco l'elemento separatore
 		final String DELIMITER = ";";
 		try
 		{
 	        String line = "";
-	        //Create the file reader
+	    //Creo il FileReader
 	        fileReader = new BufferedReader(new FileReader(fileToParse));
 	        line = fileReader.readLine();
 	        Field[] fields = students.get(0).getClass().getDeclaredFields();
 	        String[] attrs = line.split(DELIMITER);
 	        int i=0;
+	    //Prendo l'intestazione di ogni colonna con un foreach e le salvo in un array
 	        for(String attr : attrs)
 	        {	
 	           Method m = students.get(0).getClass().getMethod("get"+fields[i].getName().substring(0, 1).toUpperCase()+fields[i].getName().substring(1));
@@ -73,29 +74,21 @@ public class StudentService{
 	           i++;
 	        }
 	        
-	        //Read the file line by line
-	        
+	     //Leggo il file riga per riga e separo gli elementi
 	        while ((line = fileReader.readLine()) != null)
 	        {
-	            //Get all tokens available in line
+	        //Prendo tutti gli elementi separati da virgola e li inserisco in array di stringhe
 	            String[] tokens = line.split(DELIMITER);
+	        //Inserisco i valori in nuovi oggetti delle classi modellate
 	            Study newstudy = new Study(tokens[20],Float.parseFloat(tokens[17]),Float.parseFloat(tokens[29]), Integer.parseInt(tokens[23]));
 	            Placement newplacement = new Placement (tokens[13],tokens[14],tokens[16],tokens[21],Integer.parseInt(tokens[24]),Integer.parseInt(tokens[31]),tokens[15].charAt(0),Float.parseFloat(tokens[18]));
 	            Institute newinstitute = new Institute (tokens[2],tokens[3],tokens[11],tokens[12]);
 	            Language newlanguage = new Language (tokens[28],tokens[29],tokens[27].charAt(0));
-	    //      Erasmus newerasmus = new Erasmus(tokens[22],tokens[10].charAt(0),tokens[19].charAt(0),Integer.parseInt(tokens[7]),Integer.parseInt(tokens[25]),Integer.parseInt(tokens[26]),tokens[32].charAt(0),newstudy,newplacement,newlanguage,newinstitute);
 	            Student newstudent = new Student(tokens[22],tokens[10].charAt(0),tokens[19].charAt(0),Integer.parseInt(tokens[7]),Integer.parseInt(tokens[25]),Integer.parseInt(tokens[26]),tokens[32].charAt(0),newstudy,newplacement,newlanguage,newinstitute,tokens[0],tokens[1],tokens[6], tokens[8], Integer.parseInt(tokens[4]), Integer.parseInt(tokens[9]), tokens[5].charAt(0));
 	            students.add(newstudent);
-	            
-	            //for(String token : tokens)
-	            //{
-	             //   if(i==0)
-	            	//Print all tokens
-	           //     System.out.println(token);
-	            //}
-	            
 	        }
 		}
+	//Gestisco le eccezioni
 		catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -108,28 +101,32 @@ public class StudentService{
 			}
 		}
 	}
-	
+//Restituisce le intestazioni delle colonne
 	public List<Attribute> retrieveDataAttribute(){
         return StudentService.getAttributes();
 	} 
-	
+//Restituisce i dati degli studenti con eventuali filtri
 	public List<Student> retrieveDataStudent(String fieldName){
         return this.getStudents(fieldName);
 	} 
-	
+//Restituisce le statistiche di un attriburo passatogli per parametro
 	@SuppressWarnings("finally")
 	public HashMap<String,Double>retrieveStatistics(String param){
 		HashMap<String,Double> statistics = new HashMap<>();
 		List<Student> check= new ArrayList<>();
+		//Controlla se gli è stato passato un parametro,se è vuoto utilizza students altrimenti applica un filtro adatto
 			if(param.isEmpty()) {
 				check = students;
 			}else {
 				check = doFilter(check,param);
 			}
+	//Gestisco le eccezioni di Method
 		try{
+		//Cerco la variabile passata come parametro e ne controllo il tipo
 			Method m = check.get(0).getClass().getMethod("get"+param.substring(0, 1).toUpperCase()+param.substring(1));
 			if(m.getReturnType().getName().equals("String")||m.getReturnType().getName().equals("char"))
 				return check.get(0).countString(check,param);
+		//Nel caso di stringa manda l'unico metodo associatovi, se è un tipo numerico chiama i metodi per le statistiche previste
 			else{
 				statistics.put("count",(double)students.get(0).countNum(check,param));
 				statistics.put("avg", students.get(0).avg(check,param));
@@ -145,19 +142,23 @@ public class StudentService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	//Dovendo restituire un HashMap, se vuota restituisce comunque generando un errore
 		finally {
 			return statistics;
 		}
 	}
-	
+//Gestisco i filtri prendendo 
 	public List<Student> doFilter(List<Student> students, String param) {
 		List<Student> check= new ArrayList<>();
+	//Prendo le informazioni sul filtro da applicare dalla barra di ricerca
 		String[] attr=param.split("{|:{|: {|:[|: [|]}}:]}");
 		try {
+		//Avvio un controllo sul nome del filtro
 			if(attr[0].charAt(0)=='$') {
 				Method m=this.getClass().getMethod("filter"+attr[0]);
+			//
 				for(Student student:students) {
-					if((boolean)m.invoke(this,student,attr[1]))
+					if((boolean)m.invoke(this,this.student,attr[1]))
 						check.add(student);
 				}
 			}

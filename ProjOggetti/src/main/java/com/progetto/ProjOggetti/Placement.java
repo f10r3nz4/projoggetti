@@ -1,5 +1,10 @@
 package com.progetto.ProjOggetti;
 
+/**
+ * <p>Nella classe pubblica <b>Placement</b> sono presenti diversi parametri.
+ * Si implementa il costruttore con super(), i get ed i set ed un toString() di controllo.</p>
+ */
+
 public class Placement {
 	private String enterprise;
 	private String country;

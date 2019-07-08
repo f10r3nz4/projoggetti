@@ -1,5 +1,10 @@
 package com.progetto.ProjOggetti;
 
+/**
+ * <p>La classe pubblica <b>Study</b> viene usata analogamente a <b>Placement</b>,
+ * vengono passati dei parametri e si definiscono costruttore e getter e setters.</p>
+ */
+
 public class Study {
 	private String start;
 	private float length;

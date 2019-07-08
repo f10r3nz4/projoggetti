@@ -1,7 +1,7 @@
 package com.progetto.ProjOggetti;
 /**
- * Classe che descrive uno Studente
- * estende la classe Erasmus e tutti i suoi attributi
+ * <p>Classe che descrive uno <b>Studente</b>
+ * estende la classe <b>Erasmus</b> e tutti i suoi attributi</p>
  */
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -18,8 +18,9 @@ public class Student extends Erasmus{
 	private int n_years;
 	private char gender;
 	
-	/**Costruttore delle classe
-	 * Parametri ereditati da Erasmus
+	/**Costruttore delle classe composto da:
+	 * 
+	 * <p>-Parametri ereditati da Erasmus
 	 * 
 	 * @param consortium
 	 * @param mob_type
@@ -31,16 +32,18 @@ public class Student extends Erasmus{
 	 * @param study
 	 * @param placement
 	 * @param language
-	 * @param institute
+	 * @param institute</p>
 	 * 
-	 * Parametri di Studente
+	 * <p>-Parametri di Studente
 	 * @param iD
 	 * @param mobility_code
 	 * @param nationality
 	 * @param study_level
 	 * @param age
 	 * @param n_years
-	 * @param gender
+	 * @param gender</p>
+	 * 
+	 * Abbiamo poi implementato i vari get e set sia della classe che della superclasse.
 	 */
 
 	
@@ -59,9 +62,6 @@ public class Student extends Erasmus{
 		this.gender = gender;
 	}
 	
-	/**
-	 * Getter e setter della classe
-	 */
 	
 	public String getID() {
 		return ID;
@@ -118,9 +118,7 @@ public class Student extends Erasmus{
 	public void setGender(char gender) {
 		this.gender = gender;
 	}
-	/**
-	 * Getter degli elementi della superclasse
-	 */
+
 	public String getConsortium() {
 		return super.getConsortium();
 	}
@@ -225,15 +223,21 @@ public class Student extends Erasmus{
 		return super.getInstituteHost_country();
 	}
 	
-	//il metodo effettua il conteggio delle parole dell'attributo, viene richiamato dal main
 	/**
-	 * Conta tutti i valori di @param request di tipo stringa di ogni Student di 
+	 * I vari metodi con l'utilizzo di "<i>@SuppressWarnings("finally")</i>" attravero la quale si potranno richiedere vari filtri predefiniti.
+	 * 
+	 * Metodo <b><i>countString</i></b>
+	 * <p>Conta tutti i valori di @param request di tipo stringa di ogni Student di 
 	 * @param student suddividendoli per valore e restituendo una HashMap di essi
 	 * 
 	 * @param student
 	 * @param request
-	 * @return
+	 * @return</p>
+	 * 
+	 * 
 	 */
+	
+	//il metodo effettua il conteggio delle parole dell'attributo, viene richiamato dal main
 	@SuppressWarnings("finally")
 	public HashMap<String,Double> countString(List<Student> student, String request) {
 		double j=0;
@@ -272,12 +276,13 @@ public class Student extends Erasmus{
 	
 	
 	/**
-	 * Conta tutti i valori di @param requestdi tipo numerico di ogni Student di 
+	 * Metodo <b><i>countNum</i></b>
+	 * <p>Conta tutti i valori di @param requestdi tipo numerico di ogni Student di 
 	 * @param student suddividendoli per valore e restituendo una HashMap di essi
 	 * 
 	 * @param student
 	 * @param request
-	 * @return
+	 * @return</p>
 	 */
 	@SuppressWarnings("finally")
 	public int countNum(List<Student> student,String request){
@@ -309,11 +314,12 @@ public class Student extends Erasmus{
 	}
 	
 	/**
-	 * Calcola la somma dei valori di @param request di ogni Student di @param student
+	 * Metodo <b><i>sum</i></b>
+	 * <p>Calcola la somma dei valori di @param request di ogni Student di @param student
 	 * 
 	 * @param student
 	 * @param request
-	 * @return
+	 * @return</p>
 	 */
 	@SuppressWarnings("finally")
 	public double sum(List<Student> student,String request) {
@@ -344,11 +350,12 @@ public class Student extends Erasmus{
 	}
 	
 	/**
-	 * Trova il valore massimo di @param request di ogni Student di @param student
+	 * Metodo <b><i>max</i></b>
+	 * <p>Trova il valore massimo di @param request di ogni Student di @param student
 	 * 
 	 * @param student
 	 * @param request
-	 * @return
+	 * @return</p>
 	 */
 	@SuppressWarnings("finally")
 	public double max(List<Student> student,String request) {
@@ -381,11 +388,13 @@ public class Student extends Erasmus{
 	
 	
 	/**
-	 * Trova il valore minimo di @param request di ogni Student di @param student
+	 * Metodo <b><i>min</i></b>
+	 * 
+	 * <p>Trova il valore minimo di @param request di ogni Student di @param student
 	 * 
 	 * @param student
 	 * @param request
-	 * @return
+	 * @return</p>
 	 */
 	@SuppressWarnings("finally")
 	public double min(List<Student> student,String request) {
@@ -417,11 +426,13 @@ public class Student extends Erasmus{
 	}
 	
 	/**
-	 * Calcola la media dei valori di @param request di ogni Student di @param student
+	 * Metodo <b><i>avg</i></b>
+	 * 
+	 * <p>Calcola la media dei valori di @param request di ogni Student di @param student
 	 * 
 	 * @param student
 	 * @param request
-	 * @return
+	 * @return</p>
 	 */
 	public double avg(List<Student> student,String request) {
 		double sum=this.sum(student,request);
@@ -431,12 +442,14 @@ public class Student extends Erasmus{
 	
 	
 	/**
-	 * Calcola la deviazione standard dei valori di @param request di ogni Student 
+	 * Metodo <b><i>dev_std</i></b>
+	 * 
+	 * <p>Calcola la deviazione standard dei valori di @param request di ogni Student 
 	 * di @param student
 	 * 
 	 * @param student
 	 * @param request
-	 * @return
+	 * @return</p>
 	 */
 	@SuppressWarnings("finally")
 	public double dev_std(List<Student> student,String request) {

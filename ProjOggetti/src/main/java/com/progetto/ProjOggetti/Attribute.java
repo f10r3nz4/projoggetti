@@ -1,5 +1,13 @@
 package com.progetto.ProjOggetti;
 
+/**
+ * <p>La classe pubblica <b>Attribute</b> viene usata per prendere i dati ed i tipi di dati
+ * all'interno delle classi modellate in modo da poter restituire, mediante un opportuno
+ * metodo definito nel <i>Controller</i>, la lista dei metadati delle variabili in formato json.
+ * Vengono quidndi create tre variabili di tipo String con i conseuti costruttore con super(),
+ * getter e setters ed un toString() di controllo.</p>
+ */
+
 public class Attribute {
 	String alias;
 	String sourceField;

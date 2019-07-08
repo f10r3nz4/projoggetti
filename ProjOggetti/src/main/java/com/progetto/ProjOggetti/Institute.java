@@ -1,5 +1,12 @@
 package com.progetto.ProjOggetti;
 
+/**
+ * <p>La classe <b>Institute</b> è composta da tutti i valori che definiscono un Istuto scolastico
+ * per quanto riguarda i dati in utilizzo.
+ * E' una classe pubblica che prende quattro parametri di tipo stringa.
+ * Sono poi presenti i consueti costruttore (con super()) e get e set.</p>
+ */
+
 public class Institute {
 	private String home_code;
 	private String home_country;

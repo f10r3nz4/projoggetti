@@ -1,5 +1,10 @@
 package com.progetto.ProjOggetti;
 
+/**
+ * <p>Nella classe pubblica <b>Language</b> si passano tre parametri di cui due tipi stringa ed un char.
+ * Sono presenti il costruttore con super(), get e set e un toString() di controllo.</p>
+ */
+
 public class Language {
 	private String language;
 	private String lang_preparation;
