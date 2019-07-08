@@ -26,7 +26,7 @@ public class StudentController {
 		return studentService.retrieveDataStudent(fieldName);
 	}
 	
-	@GetMapping("/statistics/}")
+	@GetMapping("/statistics/")
 	public HashMap<String,Double> retrieveStatistics(@RequestParam String param) {
 		return studentService.retrieveStatistics(param);
 	}
