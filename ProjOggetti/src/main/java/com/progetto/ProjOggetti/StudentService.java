@@ -37,47 +37,11 @@ public class StudentService{
 	
 	
 	@SuppressWarnings("finally")
-	public  List<Student> getStudents(String param) {
-		List<Student> check= new ArrayList<>();
-		String[] attr=param.split("{|:{|: {|:[|: [|]}}:]}");
+	public List<Student> getStudents(String param) {
 		if(param.isEmpty())
 			return students;
 		else {
-			try {
-				if(attr[0].charAt(0)=='$') {
-					Method m=this.getClass().getMethod("filter"+attr[0]);
-					for(Student student:students) {
-						if((boolean)m.invoke(this,student,attr[1]))
-							check.add(student);
-					}
-				}
-				else {
-				Method m=this.getClass().getMethod("filter"+attr[1]);
-				for(Student student:students) {
-					if((boolean)m.invoke(this,student,attr[0],attr[2]))
-						check.add(student);
-				}
-			}
-			return check;
-			}catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			finally{
-				return check;
-			}
+			return doFilter(students,param);
 		}
 	}
 
@@ -150,33 +114,19 @@ public class StudentService{
 	} 
 	
 	public List<Student> retrieveDataStudent(String fieldName){
-        return StudentService.getStudents(fieldName);
+        return this.getStudents(fieldName);
 	} 
 	
 	@SuppressWarnings("finally")
 	public HashMap<String,Double>retrieveStatistics(String param){
 		HashMap<String,Double> statistics = new HashMap<>();
-		try {
-			List<Student> check= new ArrayList<>();
-			String[] attr=param.split("{|:{|: {|:[|: [|]}}:]}");
-			if(!param.isEmpty()) {
-				if(attr[0].charAt(0)=='$') {
-					Method m=this.getClass().getMethod("filter"+attr[0]);
-					for(Student student:students) {
-						if((boolean)m.invoke(this,student,attr[1]))
-							check.add(student);
-					}
-				}
-				else {
-					Method m=this.getClass().getMethod("filter"+attr[1]);
-					for(Student student:students) {
-						if((boolean)m.invoke(this,student,attr[0],attr[2]))
-							check.add(student);
-					}
-				}
-			}else {
+		List<Student> check= new ArrayList<>();
+			if(param.isEmpty()) {
 				check = students;
+			}else {
+				check = doFilter(check,param);
 			}
+		try{
 			Method m = check.get(0).getClass().getMethod("get"+param.substring(0, 1).toUpperCase()+param.substring(1));
 			if(m.getReturnType().getName().equals("String")||m.getReturnType().getName().equals("char"))
 				return check.get(0).countString(check,param);
@@ -200,6 +150,46 @@ public class StudentService{
 		}
 	}
 	
+	public List<Student> doFilter(List<Student> students, String param) {
+		List<Student> check= new ArrayList<>();
+		String[] attr=param.split("{|:{|: {|:[|: [|]}}:]}");
+		try {
+			if(attr[0].charAt(0)=='$') {
+				Method m=this.getClass().getMethod("filter"+attr[0]);
+				for(Student student:students) {
+					if((boolean)m.invoke(this,student,attr[1]))
+						check.add(student);
+				}
+			}
+			else {
+			Method m=this.getClass().getMethod("filter"+attr[1]);
+			for(Student student:students) {
+				if((boolean)m.invoke(this,student,attr[0],attr[2]))
+					check.add(student);
+			}
+		}
+		return check;
+		}catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			return check;
+		}
+		
+	}
 //Logical filters operators
 	@SuppressWarnings("finally")
 	public boolean filter$not(Student student, String param, String value) {
@@ -272,15 +262,36 @@ public class StudentService{
 	
 	@SuppressWarnings("finally")
 	public boolean filter$in(Student student, String param) {
-		String[] and=param.split("{|:|: |}, {|}");
+		String[] ins=param.split(",");
 		try {
-			Method m1=student.getClass().getMethod("get"+and[0].substring(0, 1).toUpperCase()+and[0].substring(1));
-			Method m2=student.getClass().getMethod("get"+and[2].substring(0, 1).toUpperCase()+and[2].substring(1));
-			if(and[0]!=and[2] &&(m1.invoke(student).toString()== and[1] || (double)m1.invoke(student)==Double.parseDouble(and[1])) &&
-					(m2.invoke(student).toString()== and[3] || (double)m2.invoke(student)==Double.parseDouble(and[3])))
-				return true;
-			else 
-				return false;
+			Method m1=student.getClass().getMethod("get"+ins[0].substring(0, 1).toUpperCase()+ins[0].substring(1));
+			for(String in:ins) {
+				if(m1.invoke(student).toString()==in || (double)m1.invoke(student)==Double.parseDouble(in))
+					return true;
+			}
+			return false;
+		}
+		catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return false;
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	public boolean filter$nin(Student student, String param) {
+		String[] ins=param.split(",");
+		try {
+			Method m1=student.getClass().getMethod("get"+ins[0].substring(0, 1).toUpperCase()+ins[0].substring(1));
+			for(String in:ins)
+				if(m1.invoke(student).toString()==in || (double)m1.invoke(student)==Double.parseDouble(in))
+					return false;
+			return true;
 		}
 		catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
