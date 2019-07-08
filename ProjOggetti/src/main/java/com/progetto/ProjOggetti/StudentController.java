@@ -22,7 +22,12 @@ public class StudentController {
 	
 	
 	@GetMapping("/data/")
-	public List<Student> retriveAllData(@RequestParam(value="fieldName", defaultValue="") String fieldName) {
+	public List<Student> retriveAllData(@RequestParam(filter="fieldName", defaultValue="") String fieldName) {
+		return studentService.retrieveDataStudent(fieldName);
+	}
+	
+	@GetMapping("/data/filter/{filter}")
+	public List<Student> retriveAllData(@RequestParam(filter="fieldName", defaultValue="") String fieldName) {
 		return studentService.retrieveDataStudent(fieldName);
 	}
 	

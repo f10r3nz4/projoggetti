@@ -270,6 +270,30 @@ public class StudentService{
 		}
 	}
 	
+	@SuppressWarnings("finally")
+	public boolean filter$in(Student student, String param) {
+		String[] and=param.split("{|:|: |}, {|}");
+		try {
+			Method m1=student.getClass().getMethod("get"+and[0].substring(0, 1).toUpperCase()+and[0].substring(1));
+			Method m2=student.getClass().getMethod("get"+and[2].substring(0, 1).toUpperCase()+and[2].substring(1));
+			if(and[0]!=and[2] &&(m1.invoke(student).toString()== and[1] || (double)m1.invoke(student)==Double.parseDouble(and[1])) &&
+					(m2.invoke(student).toString()== and[3] || (double)m2.invoke(student)==Double.parseDouble(and[3])))
+				return true;
+			else 
+				return false;
+		}
+		catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return false;
+		}
+	}
+	
 	//Conditional filter operators
 
 	@SuppressWarnings("finally")
