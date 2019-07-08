@@ -1,5 +1,8 @@
 package com.progetto.ProjOggetti;
 
+/** <p>Classe astratta che racchiude gli attributi specifici di un'esperienza Erasmus, fra i parametri
+ * si hanno anche degli oggetti di classi più "<i>piccole</i>"</p>*/
+
 public abstract class Erasmus {
 	private String consortium;
 	private char mob_type;
@@ -12,7 +15,13 @@ public abstract class Erasmus {
 	private Placement placement;
 	private Language language;
 	private Institute institute;
-
+	
+	/**
+	 * Chiamiamo il <b>costruttore</b> con super(), in quanto Erasmus andrà poi ad estendere la macro-classe Student.
+	 * Oltre al costruttore ed un toString di controllo finale, implementiamo il get ed i set con particolare attenzione
+	 * ai singoli valori generalizzati nel data-set.
+	 */
+	
 	public Erasmus(String consortium, char mob_type, char sh_duration, int subject_area, int total_credits,
 			int special_needs, char prev_partecipation, Study study, Placement placement, Language language,
 			Institute institute) {
@@ -30,6 +39,7 @@ public abstract class Erasmus {
 		this.institute = institute;
 	}
 
+	
 	public String getConsortium() {
 		return consortium;
 	}
