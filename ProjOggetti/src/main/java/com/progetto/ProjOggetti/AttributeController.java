@@ -1,4 +1,4 @@
-package com.progetto.ProjOggetti;
+/*package com.progetto.ProjOggetti;
 
 import java.net.URI;
 import java.util.List;

@@ -27,7 +27,14 @@ public class StudentController {
 	}
 //Richiama il metodo per restituire i dati in formato json permettendo di calcolarne le statistiche anche con filtri
 	@GetMapping("/statistics/")
-	public HashMap<String,Double> retrieveStatistics(@RequestParam String param) {
-		return studentService.retrieveStatistics(param);
+	public HashMap<String,Double> retrieveStatistics(@RequestParam(name="field", defaultValue="") String param,
+	@RequestParam(name="filter", defaultValue="") String filter) {
+		return studentService.retrieveStatistics(param,filter);
 	}
+	
+	@GetMapping("/metadata/")
+	public List<Attribute> retrieveData() {
+		return studentService.retrieveDataAttribute();
+	}
+	//Richiama il metodo per restituire i metadati in formato json in base ai parametri definiti in Attribute
 }

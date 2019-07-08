@@ -87,6 +87,7 @@ public class StudentService{
 	            Student newstudent = new Student(tokens[22],tokens[10].charAt(0),tokens[19].charAt(0),Integer.parseInt(tokens[7]),Integer.parseInt(tokens[25]),Integer.parseInt(tokens[26]),tokens[32].charAt(0),newstudy,newplacement,newlanguage,newinstitute,tokens[0],tokens[1],tokens[6], tokens[8], Integer.parseInt(tokens[4]), Integer.parseInt(tokens[9]), tokens[5].charAt(0));
 	            students.add(newstudent);
 	        }
+	        fileReader.close();
 		}
 	//Gestisco le eccezioni
 		catch (Exception e) {
