@@ -1,5 +1,8 @@
 package com.progetto.ProjOggetti;
-
+/**
+ * Classe che descrive uno Studente
+ * estende la classe Erasmus e tutti i suoi attributi
+ */
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -14,7 +17,33 @@ public class Student extends Erasmus{
 	private int age;
 	private int n_years;
 	private char gender;
+	
+	/**Costruttore delle classe
+	 * Parametri ereditati da Erasmus
+	 * 
+	 * @param consortium
+	 * @param mob_type
+	 * @param sh_duration
+	 * @param subject_area
+	 * @param total_credits
+	 * @param special_needs
+	 * @param prev_partecipation
+	 * @param study
+	 * @param placement
+	 * @param language
+	 * @param institute
+	 * 
+	 * Parametri di Studente
+	 * @param iD
+	 * @param mobility_code
+	 * @param nationality
+	 * @param study_level
+	 * @param age
+	 * @param n_years
+	 * @param gender
+	 */
 
+	
 	public Student(String consortium, char mob_type, char sh_duration, int subject_area, int total_credits,
 			int special_needs, char prev_partecipation, Study study, Placement placement, Language language,
 			Institute institute, String iD, String mobility_code, String nationality, String study_level, int age,
@@ -29,7 +58,11 @@ public class Student extends Erasmus{
 		this.n_years = n_years;
 		this.gender = gender;
 	}
-
+	
+	/**
+	 * Getter e setter della classe
+	 */
+	
 	public String getID() {
 		return ID;
 	}
@@ -85,7 +118,9 @@ public class Student extends Erasmus{
 	public void setGender(char gender) {
 		this.gender = gender;
 	}
-	
+	/**
+	 * Getter degli elementi della superclasse
+	 */
 	public String getConsortium() {
 		return super.getConsortium();
 	}
@@ -190,10 +225,15 @@ public class Student extends Erasmus{
 		return super.getInstituteHost_country();
 	}
 	
-	//effettuiamo un controllo sull'attributo String richiesto dall'utente in modo da proseguire con il conteggio
-	
 	//il metodo effettua il conteggio delle parole dell'attributo, viene richiamato dal main
-	
+	/**
+	 * Conta tutti i valori di @param request di tipo stringa di ogni Student di 
+	 * @param student suddividendoli per valore e restituendo una HashMap di essi
+	 * 
+	 * @param student
+	 * @param request
+	 * @return
+	 */
 	@SuppressWarnings("finally")
 	public HashMap<String,Double> countString(List<Student> student, String request) {
 		double j=0;
@@ -230,75 +270,15 @@ public class Student extends Erasmus{
 		}
 	}
 	
-	//effettuiamo un controllo sull'attributo Char richiesto dall'utente in modo da proseguire con il conteggio
-		
-	//il metodo effettua il conteggio dei valori dell'attributo, viene richiamato dal main
 	
-	/*public void countChar(Student student[], String request) {
-		int j;
-		Vector<char> done= new Vector<char>();
-		String value;
-		boolean a=true;
-		value=student[0].controlloChar(request);
-		while(a){
-			j=0;
-			for(int i=0; i<student.length;i++) {
-				if(student[i].controlloChar(request).equals(value))
-					j++;
-			}
-			System.out.println(value+":"+j);
-			done.add(value);
-			a=false;
-			int j=0;
-			do {
-				if(!done.contains(student[j].controlloChar(request)))
-					a=true;
-				else
-					j++;
-			}while(j<student.length & a==false);		
-		}
-	}*/
-//Metodo per stringhe	
-//Variante 1 di count(stampa tutti i valori conteggiati di tutti gli attributi)
-
-	/* Variante 2 del count(prende tutti i valori di un attributo e poi li mette sul main per conteggiarne uno)
-	public Vector<String> find (String request, Student[] student) {
-		switch(request) {
-			case "ID":
-				Vector<String> results= new Vector<String>();
-				for(int i=0;i<student.length;i++) {
-					results.add(student[i].ID);
-				}
-				return results;
-				break;
-			case "nationality":
-				Vector<String> results= new Vector<String>();
-				for(int i=0;i<student.length;i++) {
-					results.add(student[i].ID);
-				}
-				return results;
-				break;
-			case "age":
-				Vector<String> results= new Vector<String>();
-				for(int i=0;i<student.length;i++) {
-					results.add(student[i].ID);
-				}
-				return results;
-				break;
-			case "n_years":break;
-			case "gender":break;
-			case "consortium":break;
-			case "mob_type":break;
-			case "sh_duration":break;
-			case "subject_area":break;
-			case "credits":break;
-			case "special_needs":break;
-			case "prev_partecipation":break;
-			default: break;
-		}
-	}
-	*/
-	
+	/**
+	 * Conta tutti i valori di @param requestdi tipo numerico di ogni Student di 
+	 * @param student suddividendoli per valore e restituendo una HashMap di essi
+	 * 
+	 * @param student
+	 * @param request
+	 * @return
+	 */
 	@SuppressWarnings("finally")
 	public int countNum(List<Student> student,String request){
 		int j=0;
@@ -328,6 +308,13 @@ public class Student extends Erasmus{
 		}
 	}
 	
+	/**
+	 * Calcola la somma dei valori di @param request di ogni Student di @param student
+	 * 
+	 * @param student
+	 * @param request
+	 * @return
+	 */
 	@SuppressWarnings("finally")
 	public double sum(List<Student> student,String request) {
 		int j=0;
@@ -356,6 +343,13 @@ public class Student extends Erasmus{
 		}
 	}
 	
+	/**
+	 * Trova il valore massimo di @param request di ogni Student di @param student
+	 * 
+	 * @param student
+	 * @param request
+	 * @return
+	 */
 	@SuppressWarnings("finally")
 	public double max(List<Student> student,String request) {
 		double max=0;
@@ -385,6 +379,14 @@ public class Student extends Erasmus{
 		}
 	}
 	
+	
+	/**
+	 * Trova il valore minimo di @param request di ogni Student di @param student
+	 * 
+	 * @param student
+	 * @param request
+	 * @return
+	 */
 	@SuppressWarnings("finally")
 	public double min(List<Student> student,String request) {
 		double min=0;
@@ -414,12 +416,28 @@ public class Student extends Erasmus{
 		}
 	}
 	
+	/**
+	 * Calcola la media dei valori di @param request di ogni Student di @param student
+	 * 
+	 * @param student
+	 * @param request
+	 * @return
+	 */
 	public double avg(List<Student> student,String request) {
 		double sum=this.sum(student,request);
 		int count=this.countNum(student,request);
 		return sum/count;
 	}
 	
+	
+	/**
+	 * Calcola la deviazione standard dei valori di @param request di ogni Student 
+	 * di @param student
+	 * 
+	 * @param student
+	 * @param request
+	 * @return
+	 */
 	@SuppressWarnings("finally")
 	public double dev_std(List<Student> student,String request) {
 		double avg=this.avg(student,request);
