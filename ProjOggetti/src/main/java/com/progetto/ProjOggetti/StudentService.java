@@ -152,16 +152,18 @@ public class StudentService{
 		List<Student> check= new ArrayList<>();
 	//Prendo le informazioni sul filtro da applicare dalla barra di ricerca
 		String[] attr=param.split("{|:{|: {|:[|: [|]}}:]}");
+	//Gestisco gli errori
 		try {
-		//Avvio un controllo sul nome del filtro
+		//Avvio un controllo sul nome del filtro per una tipologia
 			if(attr[0].charAt(0)=='$') {
 				Method m=this.getClass().getMethod("filter"+attr[0]);
-			//
+		//Eseguo il filtro per ogni istanza di studente
 				for(Student student:students) {
-					if((boolean)m.invoke(this,this.student,attr[1]))
+					if((boolean)m.invoke(this,student,attr[1]))
 						check.add(student);
 				}
 			}
+		//Controllo un'altra tipologia di filtro
 			else {
 			Method m=this.getClass().getMethod("filter"+attr[1]);
 			for(Student student:students) {
@@ -306,7 +308,7 @@ public class StudentService{
 		}
 	}
 	
-	//Conditional filter operators
+//Conditional filter operators
 
 	@SuppressWarnings("finally")
 	public boolean filter$gt(Student student, String param, String value) {

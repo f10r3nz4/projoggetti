@@ -18,7 +18,7 @@ public class AttributeController {
 	
 	@Autowired
 	private StudentService studentService;
-	
+	//Richiama il metodo per restituire i metadati in formato json in base ai parametri definiti in Attribute
 	@GetMapping("/metadata/")
 	public List<Attribute> retrieveData() {
 		return studentService.retrieveDataAttribute();

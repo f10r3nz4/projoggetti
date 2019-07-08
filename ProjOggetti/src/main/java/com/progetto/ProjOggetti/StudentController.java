@@ -20,12 +20,12 @@ public class StudentController {
 	@Autowired
 	private StudentService studentService;
 	
-	
+//Richiama il metodo per restituire i dati in formato json permettendo di specificare un filtro tra quelli definiti
 	@GetMapping("/data/")
 	public List<Student> retriveAllData(@RequestParam(name="filter", defaultValue="") String fieldName) {
 		return studentService.retrieveDataStudent(fieldName);
 	}
-	
+//Richiama il metodo per restituire i dati in formato json permettendo di calcolarne le statistiche anche con filtri
 	@GetMapping("/statistics/")
 	public HashMap<String,Double> retrieveStatistics(@RequestParam String param) {
 		return studentService.retrieveStatistics(param);
