@@ -5,6 +5,7 @@ package com.progetto.ProjOggetti;
  */
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 // import java.math.*;
@@ -48,7 +49,7 @@ public class Student extends Erasmus{
 
 	
 	public Student(String consortium, char mob_type, char sh_duration, int subject_area, int total_credits,
-			int special_needs, char prev_partecipation, Study study, Placement placement, Language language,
+			float special_needs, char prev_partecipation, Study study, Placement placement, Language language,
 			Institute institute, String iD, String mobility_code, String nationality, String study_level, int age,
 			int n_years, char gender) {
 		super(consortium, mob_type, sh_duration, subject_area, total_credits, special_needs, prev_partecipation, study,
@@ -60,8 +61,7 @@ public class Student extends Erasmus{
 		this.age = age;
 		this.n_years = n_years;
 		this.gender = gender;
-	}
-	
+	}	
 	
 	public String getID() {
 		return ID;
@@ -139,7 +139,7 @@ public class Student extends Erasmus{
 		return super.getTotal_credits();
 	}
 
-	public int getSpecial_needs() {
+	public float getSpecial_needs() {
 		return super.getSpecial_needs();
 	}
 
@@ -183,7 +183,7 @@ public class Student extends Erasmus{
 		return super.getPlacementCredits();
 	}
 	
-	public int getPlacementgrant() {
+	public float getPlacementgrant() {
 		return super.getPlacementGrant();
 	}
 	
@@ -243,18 +243,19 @@ public class Student extends Erasmus{
 		double j=0;
 		HashMap<String,Double> done=new HashMap<>();
 		try {
-			for(Student item : student) {
-				Method m=item.getClass().getMethod("get"+request.substring(0, 1).toUpperCase()+request.substring(1));
-				String value=m.invoke(item).toString();
-				j=0;
-				for(Student students : student) {
-					if(m.invoke(item).toString().equals(m.invoke(students).toString()))
-						j++;
+			for(Student student1 : student) {
+				Method m=student1.getClass().getMethod("get"+request.substring(0, 1).toUpperCase()+request.substring(1));
+				String value=m.invoke(student1).toString();
+				if(!done.containsKey(value)) {
+					j=0;
+					for(Student student2 : student) {
+						if(value.equals(m.invoke(student2).toString()))
+							j++;
+					}
+				done.put(value,j);
 				}
-				System.out.println(value+":"+j);
-				String string=value.toString();
-				done.put(string,j);		
 			}
+			return done;
 		}
 		catch (NoSuchMethodException e) {
 		// TODO Auto-generated catch block
@@ -363,7 +364,6 @@ public class Student extends Erasmus{
 		try {
 			for(Student students: student) {	
 				Method m=students.getClass().getMethod("get"+request.substring(0, 1).toUpperCase()+request.substring(1));
-				max=m.invoke(students).hashCode();
 				if(m.invoke(students).hashCode()>max)
 					max=m.invoke(students).hashCode();
 			}
@@ -398,11 +398,10 @@ public class Student extends Erasmus{
 	 */
 	@SuppressWarnings("finally")
 	public double min(List<Student> student,String request) {
-		double min=0;
+		double min=Double.MAX_VALUE;
 		try {
 			for(Student students: student) {	
 				Method m=students.getClass().getMethod("get"+request.substring(0, 1).toUpperCase()+request.substring(1));
-				min=m.invoke(students).hashCode();
 				if(m.invoke(students).hashCode()<min)
 					min=m.invoke(students).hashCode();
 			}

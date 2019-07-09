@@ -2,7 +2,7 @@ package com.progetto.ProjOggetti;
 
 /**
  * <p>Nella classe pubblica <b>Placement</b> sono presenti diversi parametri.
- * Si implementa il costruttore con super(), i get ed i set ed un toString() di controllo.</p>
+ * Si implementa il costruttore con super(), i get ed i set.</p>
  */
 
 public class Placement {
@@ -11,11 +11,11 @@ public class Placement {
 	private String sector;
 	private String start;
 	private int credits;
-	private int grant;
+	private float grant;
 	private char size;
 	private float length;
 	
-	public Placement(String enterprise, String country, String sector, String start, int credits, int grant, char size,
+	public Placement(String enterprise, String country, String sector, String start, int credits, float grant, char size,
 			float length) {
 		super();
 		this.enterprise = enterprise;
@@ -69,11 +69,11 @@ public class Placement {
 		this.credits = credits;
 	}
 
-	public int getGrant() {
+	public float getGrant() {
 		return grant;
 	}
 
-	public void setGrant(int grant) {
+	public void setGrant(float grant) {
 		this.grant = grant;
 	}
 
@@ -93,9 +93,4 @@ public class Placement {
 		this.length = length;
 	}
 
-	@Override
-	public String toString() {
-		return "Placement [enterprise=" + enterprise + ", country=" + country + ", sector=" + sector + ", start="
-				+ start + ", credits=" + credits + ", grant=" + grant + ", size=" + size + ", length=" + length + "]";
-	}
 }

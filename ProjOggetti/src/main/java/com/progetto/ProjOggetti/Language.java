@@ -2,7 +2,7 @@ package com.progetto.ProjOggetti;
 
 /**
  * <p>Nella classe pubblica <b>Language</b> si passano tre parametri di cui due tipi stringa ed un char.
- * Sono presenti il costruttore con super(), get e set e un toString() di controllo.</p>
+ * Sono presenti il costruttore con super(), get e set.</p>
  */
 
 public class Language {
@@ -40,12 +40,6 @@ public class Language {
 
 	public void setLang_taught(char lang_taught) {
 		this.lang_taught = lang_taught;
-	}
-
-	@Override
-	public String toString() {
-		return "Language [language=" + language + ", lang_preparation=" + lang_preparation + ", lang_taught="
-				+ lang_taught + "]";
 	}
 
 }

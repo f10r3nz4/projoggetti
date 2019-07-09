@@ -9,7 +9,7 @@ public abstract class Erasmus {
 	private char sh_duration;
 	private int subject_area;
 	private int total_credits;
-	private int special_needs;
+	private float special_needs;
 	private char prev_partecipation;
 	private Study study;
 	private Placement placement;
@@ -23,7 +23,7 @@ public abstract class Erasmus {
 	 */
 	
 	public Erasmus(String consortium, char mob_type, char sh_duration, int subject_area, int total_credits,
-			int special_needs, char prev_partecipation, Study study, Placement placement, Language language,
+			float special_needs, char prev_partecipation, Study study, Placement placement, Language language,
 			Institute institute) {
 		super();
 		this.consortium = consortium;
@@ -80,11 +80,11 @@ public abstract class Erasmus {
 		this.total_credits = total_credits;
 	}
 
-	public int getSpecial_needs() {
+	public float getSpecial_needs() {
 		return special_needs;
 	}
 
-	public void setSpecial_needs(int special_needs) {
+	public void setSpecial_needs(float special_needs) {
 		this.special_needs = special_needs;
 	}
 
@@ -164,7 +164,7 @@ public abstract class Erasmus {
 		return this.getPlacement().getCredits();
 	}
 	
-	public int getPlacementGrant() {
+	public float getPlacementGrant() {
 		return this.getPlacement().getGrant();
 	}
 	
@@ -202,13 +202,5 @@ public abstract class Erasmus {
 	
 	public String getInstituteHost_country() {
 		return this.getInstitute().getHost_country();
-	}
-	
-	@Override
-	public String toString() {
-		return "Erasmus [consortium=" + consortium + ", mob_type=" + mob_type + ", sh_duration=" + sh_duration
-				+ ", subject_area=" + subject_area + ", total_credits=" + total_credits + ", special_needs="
-				+ special_needs + ", prev_partecipation=" + prev_partecipation + ", study=" + study + ", placement="
-				+ placement + ", language=" + language + ", institute=" + institute + "]";
 	}
 }
