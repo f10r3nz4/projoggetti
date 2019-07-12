@@ -1,4 +1,5 @@
-package com.progetto.Service;
+package com.progetto.service;
+
 
 /*import java.math.BigInteger;
 import java.net.URI;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 /*import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;*/
@@ -27,12 +29,12 @@ import org.springframework.http.ResponseEntity;*/
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.progetto.Classi.Attribute;
-import com.progetto.Classi.Institute;
-import com.progetto.Classi.Language;
-import com.progetto.Classi.Placement;
-import com.progetto.Classi.Student;
-import com.progetto.Classi.Study;
+import com.progetto.model.Attribute;
+import com.progetto.model.Institute;
+import com.progetto.model.Language;
+import com.progetto.model.Placement;
+import com.progetto.model.Student;
+import com.progetto.model.Study;
 
 import ch.qos.logback.core.property.ResourceExistsPropertyDefiner;
 
@@ -96,7 +98,7 @@ public class StudentService{
 	        fileReader.close();
 		}
 	//Gestisco le eccezioni
-		catch (Exception e) {
+		catch (NullPointerException | NoSuchMethodException | SecurityException | IOException e) {
 			e.printStackTrace();
 		}
 	}
