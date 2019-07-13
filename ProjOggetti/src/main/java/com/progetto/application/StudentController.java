@@ -1,7 +1,6 @@
-package com.progetto.controller;
+package com.progetto.application;
 import com.progetto.model.Attribute;
 import com.progetto.model.Student;
-import com.progetto.service.StudentService;
 
 import java.net.URI;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.progetto.service;
+package com.progetto.application;
 import com.progetto.model.Attribute;
 import com.progetto.model.Institute;
 import com.progetto.model.Language;
@@ -55,7 +55,7 @@ public class StudentService{
 //Parsing del file scaricato
 	static {
 	//Prendo il file dove effettuare il parsing e inizializzo un BufferedReader
-		String fileToParse = "C:\\Users\\user\\git\\projoggetti\\ProjOggetti\\src\\main\\java\\com\\progetto\\controller\\dati-erasmus.csv";
+		String fileToParse = "C:\\Users\\user\\git\\projoggetti\\ProjOggetti\\src\\main\\java\\com\\progetto\\application\\dati-erasmus.csv";
 		
 	//Definisco l'elemento separatore
 		final String DELIMITER = ";";
@@ -85,7 +85,7 @@ public class StudentService{
 	            students.add(newstudent);
 	        }
 	        Field[] fields = students.get(1).getClass().getFields();
-	        int i=0;
+	        int i=1;
 	        
 		    //Prendo l'intestazione di ogni colonna con un foreach e le salvo in un array
 		      /* for(String attr : attrs)
@@ -155,8 +155,7 @@ public class StudentService{
 	@SuppressWarnings("finally")
 	public List<Student> doFilter(List<Student> students, String param,String filter) {
 		List<Student> check= new ArrayList<>();
-		String attr1;
-		String attr2; 
+		String[] attrs= new String[2]; 
 		JSONObject a;
 		try {
 			if(filter.isEmpty())
@@ -164,22 +163,22 @@ public class StudentService{
 				a = (JSONObject) JSONValue.parseWithException(param);
 			else 
 				a = (JSONObject) JSONValue.parseWithException(filter);
-			attr1=a.keySet().toString().substring(1,a.keySet().toString().length()-1);
+			attrs[0]=a.keySet().toString().substring(1,a.keySet().toString().length()-1);
 		//Avvio un controllo sul nome del filtro
-			if(attr1.charAt(0)=='$') {
-				Method m=this.getClass().getMethod("filter"+attr1);
+			if(attrs[0].charAt(0)=='$') {
+				Method m=this.getClass().getMethod("filter"+attrs[0], Student.class, String.class);
 			//
 				for(Student student:students) {
-					if((boolean)m.invoke(this,student,a.get(attr1).toString()))
+					if((boolean)m.invoke(this,student,a.get(attrs[0]).toString().substring(1, a.get(attrs[0]).toString().length()-1)))
 						check.add(student);
 				}
 			}
 			else {
-				JSONObject b = (JSONObject) (a.get(attr1));
-				attr2=b.keySet().toString().substring(1,b.keySet().toString().length()-1);
-				Method m=this.getClass().getMethod("filter"+attr2,Student.class,String.class,String.class);		
+				JSONObject b = (JSONObject) (a.get(attrs[0]));
+				attrs[1]=b.keySet().toString().substring(1,b.keySet().toString().length()-1);
+				Method m=this.getClass().getMethod("filter"+attrs[1],Student.class,String.class,String.class);		
 				for(Student student:students) {
-					if((boolean)m.invoke(this,student,attr1,b.get(attr2).toString()))
+					if((boolean)m.invoke(this,student,attrs[0],b.get(attrs[1]).toString()))
 						check.add(student);
 			}
 		}
@@ -228,14 +227,19 @@ public class StudentService{
 	}
 	
 	@SuppressWarnings("finally")
-	public boolean filter$or(Student student, String param, String value) {
-		String[] or=param.split(":|,");
+	public boolean filter$or(Student student, String param) {
 		boolean a=false;
+		String[] keys = new String[2];
 		try {
-			Method m1=student.getClass().getMethod("get"+or[0].substring(0, 1).toUpperCase()+or[0].substring(1));
-			Method m2=student.getClass().getMethod("get"+or[2].substring(0, 1).toUpperCase()+or[2].substring(1));
-			if((m1.invoke(student).toString()== or[1] || (double)m1.invoke(student)==Double.parseDouble(or[1])) ||
-					(m2.invoke(student).toString()== or[3] || (double)m2.invoke(student)==Double.parseDouble(or[3])))
+			String[] params = param.split(",");
+			JSONObject filter1 = (JSONObject) JSONValue.parseWithException(params[0]);
+			JSONObject filter2 = (JSONObject) JSONValue.parseWithException(params[1]);
+			keys[0] =filter1.keySet().toString().substring(1, filter1.keySet().toString().length()-1);
+			keys[1] =filter2.keySet().toString().substring(1, filter2.keySet().toString().length()-1);
+			Method m1=student.getClass().getMethod("get"+keys[0].substring(0, 1).toUpperCase()+keys[0].substring(1));
+			Method m2=student.getClass().getMethod("get"+keys[1].substring(0, 1).toUpperCase()+keys[1].substring(1));
+			if((m1.invoke(student).toString().equals(filter1.get(keys[0]).toString()) || (double)m1.invoke(student)==Double.parseDouble(filter1.get(keys[0]).toString())) ||
+					(m2.invoke(student).toString().equals(filter2.get(keys[1]).toString()) || (double)m2.invoke(student)==Double.parseDouble(filter2.get(keys[1]).toString())))
 				a = true;
 			return a;
 		}
@@ -253,13 +257,18 @@ public class StudentService{
 	
 	@SuppressWarnings("finally")
 	public boolean filter$and(Student student, String param, String value) {
-		String[] and=param.split("{|:|: |}, {|}");
 		boolean a=false;
+		String[] keys = new String[2];
 		try {
-			Method m1=student.getClass().getMethod("get"+and[0].substring(0, 1).toUpperCase()+and[0].substring(1));
-			Method m2=student.getClass().getMethod("get"+and[2].substring(0, 1).toUpperCase()+and[2].substring(1));
-			if(and[0]!=and[2] &&(m1.invoke(student).toString()== and[1] || (double)m1.invoke(student)==Double.parseDouble(and[1])) &&
-					(m2.invoke(student).toString()== and[3] || (double)m2.invoke(student)==Double.parseDouble(and[3])))
+			String[] params = param.split(",");
+			JSONObject filter1 = (JSONObject) JSONValue.parseWithException(params[0]);
+			JSONObject filter2 = (JSONObject) JSONValue.parseWithException(params[1]);
+			keys[0] =filter1.keySet().toString().substring(1, filter1.keySet().toString().length()-1);
+			keys[1] =filter2.keySet().toString().substring(1, filter2.keySet().toString().length()-1);
+			Method m1=student.getClass().getMethod("get"+keys[0].substring(0, 1).toUpperCase()+keys[0].substring(1));
+			Method m2=student.getClass().getMethod("get"+keys[1].substring(0, 1).toUpperCase()+keys[1].substring(1));
+			if(!keys[0].equals(keys[1]) &&(m1.invoke(student).toString().equals(filter1.get(keys[0]).toString()) || (double)m1.invoke(student)==Double.parseDouble(filter1.get(keys[0]).toString())) &&
+			(m2.invoke(student).toString().equals(filter1.get(keys[1]).toString()) || (double)m2.invoke(student)==Double.parseDouble(filter1.get(keys[1]).toString())))
 				a = true; 
 			return a;
 		}
