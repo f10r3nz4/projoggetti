@@ -130,7 +130,7 @@ public class StudentService extends Parsing{
 			if(filter.isEmpty()) {
 				check = students;
 			}else {
-				check = doFilter(check,param,filter);
+				check = doFilter(students,param,filter);
 			}
 	//Gestisco le eccezioni di Method
 		try{
@@ -140,7 +140,7 @@ public class StudentService extends Parsing{
 				statistics = students.get(0).countString(check,param);
 		//Nel caso di stringa manda l'unico metodo associatovi, se è un tipo numerico chiama i metodi per le statistiche previste
 			else{
-				statistics.put("count",(double)students.get(0).countNum(check,param));
+				statistics.put("field:"+param,(double)students.get(0).countNum(check,param));
 				statistics.put("avg", students.get(0).avg(check,param));
 				statistics.put("min", students.get(0).min(check,param));
 				statistics.put("max", students.get(0).max(check,param));
@@ -346,7 +346,7 @@ public class StudentService extends Parsing{
 		boolean a=false;
 		try {
 			Method m=student.getClass().getMethod("get"+param.substring(0, 1).toUpperCase()+param.substring(1));
-			if((double)m.invoke(student)>Double.parseDouble(value))
+			if(m.getReturnType()!=String.class && Double.parseDouble(m.invoke(student).toString())>Double.parseDouble(value))
 				a = true;
 			return a;
 		}
@@ -367,7 +367,7 @@ public class StudentService extends Parsing{
 		boolean a=false;
 		try {
 			Method m=student.getClass().getMethod("get"+param.substring(0, 1).toUpperCase()+param.substring(1));
-			if((double)m.invoke(student)<Double.parseDouble(value))
+			if(m.getReturnType()!=String.class && Double.parseDouble(m.invoke(student).toString())<Double.parseDouble(value))
 				a = true;
 			return a;
 		}
@@ -388,7 +388,7 @@ public class StudentService extends Parsing{
 		boolean a=false;
 		try {
 			Method m=student.getClass().getMethod("get"+param.substring(0, 1).toUpperCase()+param.substring(1));
-			if((double)m.invoke(student)>=Double.parseDouble(value))
+			if(m.getReturnType()!=String.class && Double.parseDouble(m.invoke(student).toString())>=Double.parseDouble(value))
 				a = true;
 			return a;
 		}
@@ -409,7 +409,7 @@ public class StudentService extends Parsing{
 		boolean a=false;
 		try {
 			Method m=student.getClass().getMethod("get"+param.substring(0, 1).toUpperCase()+param.substring(1));
-			if((double)m.invoke(student)<=Double.parseDouble(value))
+			if(m.getReturnType()!=String.class && Double.parseDouble(m.invoke(student).toString())<=Double.parseDouble(value))
 				a = true;
 			return a;
 		}
@@ -431,7 +431,7 @@ public class StudentService extends Parsing{
 		boolean a=false;
 		try {
 			Method m=student.getClass().getMethod("get"+param.substring(0, 1).toUpperCase()+param.substring(1));
-			if((double)m.invoke(student)>=Double.parseDouble(val[0]) && (double)m.invoke(student)<=Double.parseDouble(val[1]))
+			if(m.getReturnType()!=String.class && Double.parseDouble(m.invoke(student).toString())>Double.parseDouble(val[0]) && Double.parseDouble(m.invoke(student).toString())>Double.parseDouble(val[1]))
 				a = true;
 			return a;
 		}
