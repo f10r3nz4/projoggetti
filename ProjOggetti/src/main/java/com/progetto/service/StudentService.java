@@ -266,7 +266,7 @@ public class StudentService extends Parsing{
 	}
 	
 	@SuppressWarnings("finally")
-	public boolean filter$and(Student student, String param, String value) {
+	public boolean filter$and(Student student, String param) {
 		boolean a=false;
 		String[] keys = new String[2];
 		try {
@@ -278,7 +278,7 @@ public class StudentService extends Parsing{
 			Method m1=student.getClass().getMethod("get"+keys[0].substring(0, 1).toUpperCase()+keys[0].substring(1));
 			Method m2=student.getClass().getMethod("get"+keys[1].substring(0, 1).toUpperCase()+keys[1].substring(1));
 			if(!keys[0].equals(keys[1]) &&(m1.invoke(student).toString().equals(filter1.get(keys[0]).toString()) || (double)m1.invoke(student)==Double.parseDouble(filter1.get(keys[0]).toString())) &&
-			(m2.invoke(student).toString().equals(filter1.get(keys[1]).toString()) || (double)m2.invoke(student)==Double.parseDouble(filter1.get(keys[1]).toString())))
+			(m2.invoke(student).toString().equals(filter2.get(keys[1]).toString()) || (double)m2.invoke(student)==Double.parseDouble(filter2.get(keys[1]).toString())))
 				a = true; 
 			return a;
 		}
@@ -301,7 +301,7 @@ public class StudentService extends Parsing{
 		try {
 			Method m1=student.getClass().getMethod("get"+param.substring(0, 1).toUpperCase()+param.substring(1));
 			for(String in:ins) {
-				if(m1.invoke(student).toString().equals(in) || (double)m1.invoke(student)==Double.parseDouble(in))
+				if(m1.invoke(student).toString().charAt(0)==in.charAt(1) || m1.invoke(student).toString().equals(in) || (double)m1.invoke(student)==Double.parseDouble(in))
 					a = true;
 			}
 			return a;
@@ -325,7 +325,7 @@ public class StudentService extends Parsing{
 		try {
 			Method m1=student.getClass().getMethod("get"+ins[0].substring(0, 1).toUpperCase()+ins[0].substring(1));
 			for(String in:ins)
-				if(m1.invoke(student).toString().equals(in) || (double)m1.invoke(student)==Double.parseDouble(in))
+				if(m1.invoke(student).toString().charAt(0)==in.charAt(1) || m1.invoke(student).toString().equals(in) || (double)m1.invoke(student)==Double.parseDouble(in))
 					a = false;
 			return a;
 		}
