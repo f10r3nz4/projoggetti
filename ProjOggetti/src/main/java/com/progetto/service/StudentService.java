@@ -84,7 +84,7 @@ public class StudentService extends Parsing{
 	            					tokens[0],tokens[1],tokens[6], tokens[8], Integer.parseInt(tokens[4]), Integer.parseInt(tokens[9]), tokens[5].charAt(0));
 	            students.add(newstudent);
 	        }
-	        Method[] methods = students.get(1).getClass().getMethods();
+	        /*Method[] methods = students.get(1).getClass().getMethods();
 	        Field[] fields = students.get(0).getClass().getFields(); 
 	        int i=0;
 		    //Prendo l'intestazione di ogni colonna con un foreach e le salvo in un array
@@ -95,7 +95,7 @@ public class StudentService extends Parsing{
 		           Attribute newattribute = new Attribute(fields[i].getName(),attrs[i],m.getReturnType().toString());		           		           
 		           attributes.add(newattribute);
 		           i++;
-		        }
+		        }*/
 	        fileReader.close();
 		}
 	//Gestisco le eccezioni
@@ -108,10 +108,10 @@ public class StudentService extends Parsing{
 		}/* catch (InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/ catch (NoSuchMethodException e) {
+		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 //Restituisce le intestazioni delle colonne
 	public List<Attribute> retrieveDataAttribute(){
