@@ -1,4 +1,6 @@
 package com.progetto.service;
+
+import com.progetto.utils.Parsing;
 import com.progetto.model.Attribute;
 import com.progetto.model.Institute;
 import com.progetto.model.Language;
@@ -39,7 +41,7 @@ import org.springframework.web.server.ResponseStatusException;
 import ch.qos.logback.core.property.ResourceExistsPropertyDefiner;
 
 @Component
-public class StudentService{
+public class StudentService extends Parsing{
 	
 	private static List<Student> students = new ArrayList<>();
 	private static List<Attribute> attributes = new ArrayList<>();
@@ -54,13 +56,13 @@ public class StudentService{
 	}
 //Parsing del file scaricato
 	static {
-	//Prendo il file dove effettuare il parsing e inizializzo un BufferedReader
-		String fileToParse = "C:\\Users\\user\\git\\projoggetti\\ProjOggetti\\src\\main\\java\\com\\progetto\\dati-erasmus.csv";
-		
-	//Definisco l'elemento separatore
+		//Definisco l'elemento separatore
 		final String DELIMITER = ";";
 		try
 		{
+		//Prendo il file dove effettuare il parsing e inizializzo un BufferedReader
+			getParsing();
+			String fileToParse = "C:\\Users\\user\\git\\projoggetti\\ProjOggetti\\src\\main\\java\\com\\progetto\\dati-erasmus.csv";
 		//Creo il FileReader
 			String line = "";
 			String attrb = "";
@@ -82,27 +84,34 @@ public class StudentService{
 	            					tokens[0],tokens[1],tokens[6], tokens[8], Integer.parseInt(tokens[4]), Integer.parseInt(tokens[9]), tokens[5].charAt(0));
 	            students.add(newstudent);
 	        }
-	     /* Method[] methods = students.get(1).getClass().getMethods();
+	        Method[] methods = students.get(1).getClass().getMethods();
 	        Field[] fields = students.get(0).getClass().getFields(); 
-	       // int i=0;
+	        int i=0;
 		    //Prendo l'intestazione di ogni colonna con un foreach e le salvo in un array
 		       for(Field f: fields)
 		        {	
 		    	   System.out.println(f.getName());
-		    	   //Method m = students.get(1).getClass().getMethod("get"+fields[i].getName().substring(0, 1).toUpperCase()+fields[i].getName().substring(1));
-		           //Attribute newattribute = new Attribute(fields[i].getName(),attr,m.getReturnType().toString());		           		           
-		           //attributes.add(newattribute);
-		           //i++;
-		        }*/
+		    	   Method m = students.get(1).getClass().getMethod("get"+fields[i].getName().substring(0, 1).toUpperCase()+fields[i].getName().substring(1));
+		           Attribute newattribute = new Attribute(fields[i].getName(),attrs[i],m.getReturnType().toString());		           		           
+		           attributes.add(newattribute);
+		           i++;
+		        }
 	        fileReader.close();
 		}
 	//Gestisco le eccezioni
 		catch (NullPointerException  | SecurityException | IOException e) {
 			e.printStackTrace();
 		}
-		/*catch (NoSuchMethodException e) {
+		catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}/* catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/ catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 //Restituisce le intestazioni delle colonne
 	public List<Attribute> retrieveDataAttribute(){

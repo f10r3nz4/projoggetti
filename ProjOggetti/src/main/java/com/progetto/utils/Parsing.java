@@ -20,7 +20,7 @@ import org.json.simple.parser.ParseException;
 public class Parsing {
 	
 	
-	public void funzione()
+	public static void getParsing()
 	{ 
 		String url = "http://data.europa.eu/euodp/data/api/3/action/package_show?id=erasmus-mobility-statistics-2012-13";
 		try {
@@ -54,7 +54,7 @@ public class Parsing {
 				        String format = (String)o1.get("format");
 				        String urlD = (String)o1.get("url");
 				        System.out.println(format + " | " + urlD);
-				        if(format.equals("csv")) {
+				        if(format.endsWith("CSV") && urlD.endsWith("SM_2012_13_20141103_01.csv")) {
 				        	download(urlD, "dati-erasmus.csv");
 				        }
 				    }
@@ -69,7 +69,7 @@ public class Parsing {
 //Metodo per salvare una copia del file di interesse assegnandogli un nome
 	public static void download(String url, String fileName) throws Exception {
 	    try (InputStream in = URI.create(url).toURL().openStream()) {
-	        Files.copy(in, Paths.get(fileName));
+	        Files.copy(in, Paths.get("src\\main\\java\\com\\progetto\\"+fileName));
 	    }
 	}
 }
