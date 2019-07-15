@@ -11,10 +11,12 @@ public abstract class Erasmus {
 	private int total_credits;
 	private float special_needs;
 	private char prev_partecipation;
+	private char qualification;
 	private Study study;
 	private Placement placement;
 	private Language language;
 	private Institute institute;
+	 
 	
 	/**
 	 * Chiamiamo il <b>costruttore</b> con super(), in quanto Erasmus andrà poi ad estendere la macro-classe Student.
@@ -22,9 +24,16 @@ public abstract class Erasmus {
 	 * ai singoli valori generalizzati nel data-set.
 	 */
 	
+	
+
+	
+	public String getConsortium() {
+		return consortium;
+	}
+
 	public Erasmus(String consortium, char mob_type, char sh_duration, int subject_area, int total_credits,
-			float special_needs, char prev_partecipation, Study study, Placement placement, Language language,
-			Institute institute) {
+			float special_needs, char prev_partecipation, char qualification, Study study, Placement placement,
+			Language language, Institute institute) {
 		super();
 		this.consortium = consortium;
 		this.mob_type = mob_type;
@@ -33,15 +42,11 @@ public abstract class Erasmus {
 		this.total_credits = total_credits;
 		this.special_needs = special_needs;
 		this.prev_partecipation = prev_partecipation;
+		this.qualification = qualification;
 		this.study = study;
 		this.placement = placement;
 		this.language = language;
 		this.institute = institute;
-	}
-
-	
-	public String getConsortium() {
-		return consortium;
 	}
 
 	public void setConsortium(String consortium) {
@@ -94,6 +99,14 @@ public abstract class Erasmus {
 
 	public void setPrev_partecipation(char prev_partecipation) {
 		this.prev_partecipation = prev_partecipation;
+	}
+
+	public char getQualification() {
+		return qualification;
+	}
+
+	public void setQualification(char qualification) {
+		this.qualification = qualification;
 	}
 
 	public Study getStudy() {

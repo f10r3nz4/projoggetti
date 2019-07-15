@@ -49,10 +49,10 @@ public class Student extends Erasmus{
 
 	
 	public Student(String consortium, char mob_type, char sh_duration, int subject_area, int total_credits,
-			float special_needs, char prev_partecipation, Study study, Placement placement, Language language,
+			float special_needs, char prev_partecipation, char qualification, Study study, Placement placement, Language language,
 			Institute institute, String iD, String mobility_code, String nationality, String study_level, int age,
 			int n_years, char gender) {
-		super(consortium, mob_type, sh_duration, subject_area, total_credits, special_needs, prev_partecipation, study,
+		super(consortium, mob_type, sh_duration, subject_area, total_credits, special_needs, prev_partecipation, qualification, study,
 				placement, language, institute);
 		ID = iD;
 		this.mobility_code = mobility_code;
@@ -145,6 +145,10 @@ public class Student extends Erasmus{
 
 	public char getPrev_partecipation() {
 		return super.getPrev_partecipation();
+	}
+	
+	public char getQualification() {
+		return super.getQualification();
 	}
 	
 	public String getStudystart(){

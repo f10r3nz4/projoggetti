@@ -80,22 +80,24 @@ public class StudentService extends Parsing{
 	            Placement newplacement = new Placement (tokens[13],tokens[14],tokens[16],tokens[21],Integer.parseInt(tokens[24]),Float.parseFloat(tokens[31]),tokens[15].charAt(0),Float.parseFloat(tokens[18]));
 	            Institute newinstitute = new Institute (tokens[2],tokens[3],tokens[11],tokens[12]);
 	            Language newlanguage = new Language (tokens[28],tokens[29],tokens[27].charAt(0));
-	            Student newstudent = new Student(tokens[22],tokens[10].charAt(0),tokens[19].charAt(0),Integer.parseInt(tokens[7]),Integer.parseInt(tokens[25]),Float.parseFloat(tokens[26]),tokens[32].charAt(0),newstudy,newplacement,newlanguage,newinstitute,
+	            Student newstudent = new Student(tokens[22],tokens[10].charAt(0),tokens[19].charAt(0),Integer.parseInt(tokens[7]),Integer.parseInt(tokens[25]),Float.parseFloat(tokens[26]),tokens[32].charAt(0),tokens[33].charAt(0),newstudy,newplacement,newlanguage,newinstitute,
 	            					tokens[0],tokens[1],tokens[6], tokens[8], Integer.parseInt(tokens[4]), Integer.parseInt(tokens[9]), tokens[5].charAt(0));
 	            students.add(newstudent);
 	        }
-	        /*Method[] methods = students.get(1).getClass().getMethods();
-	        Field[] fields = students.get(0).getClass().getFields(); 
+	        Method[] methods = students.get(1).getClass().getMethods();
 	        int i=0;
+	        boolean a;
 		    //Prendo l'intestazione di ogni colonna con un foreach e le salvo in un array
-		       for(Field f: fields)
-		        {	
-		    	   System.out.println(f.getName());
-		    	   Method m = students.get(1).getClass().getMethod("get"+fields[i].getName().substring(0, 1).toUpperCase()+fields[i].getName().substring(1));
-		           Attribute newattribute = new Attribute(fields[i].getName(),attrs[i],m.getReturnType().toString());		           		           
-		           attributes.add(newattribute);
-		           i++;
-		        }*/
+		       for(Method m: methods)
+		        {
+		    	   a=true;
+		    	   if(m.getName().substring(0, 3).equals("get")&& !m.getName().contentEquals("getLanguage") && !m.getName().contentEquals("getInstitute") && i<=33) {
+    				   Attribute newattribute = new Attribute(m.getName().substring(3).toLowerCase(),attrs[i],m.getReturnType().toString());		           		           
+    				   attributes.add(newattribute);
+    				   i++;
+    				   a=false;
+		    	   }
+		        }
 	        fileReader.close();
 		}
 	//Gestisco le eccezioni

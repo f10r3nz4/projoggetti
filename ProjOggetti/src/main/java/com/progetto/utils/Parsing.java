@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -37,7 +38,6 @@ public class Parsing {
 			//Inserisco in data le righe del file
 				   while ( ( line = buf.readLine() ) != null ) {
 					   data+= line;
-					   System.out.println( line );
 				   }
 				 } finally {
 			//Chiudo la connessione
@@ -53,16 +53,17 @@ public class Parsing {
 				        JSONObject o1 = (JSONObject)o; 
 				        String format = (String)o1.get("format");
 				        String urlD = (String)o1.get("url");
-				        System.out.println(format + " | " + urlD);
 				        if(format.endsWith("CSV") && urlD.endsWith("SM_2012_13_20141103_01.csv")) {
 				        	download(urlD, "dati-erasmus.csv");
 				        }
 				    }
 			}
-			System.out.println( "OK" );
-		} catch (IOException | ParseException e) {
+			System.out.println( "Download file completed" );
+		}catch(FileAlreadyExistsException e) {
+			System.out.println("File already exist");	
+		}catch (IOException | ParseException e) {
 			e.printStackTrace();
-		} catch (Exception e) {
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
