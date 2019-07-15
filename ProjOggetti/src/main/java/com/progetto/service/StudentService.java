@@ -1,4 +1,4 @@
-package com.progetto.application;
+package com.progetto.service;
 import com.progetto.model.Attribute;
 import com.progetto.model.Institute;
 import com.progetto.model.Language;
@@ -55,7 +55,7 @@ public class StudentService{
 //Parsing del file scaricato
 	static {
 	//Prendo il file dove effettuare il parsing e inizializzo un BufferedReader
-		String fileToParse = "C:\\Users\\user\\git\\projoggetti\\ProjOggetti\\src\\main\\java\\com\\progetto\\application\\dati-erasmus.csv";
+		String fileToParse = "C:\\Users\\user\\git\\projoggetti\\ProjOggetti\\src\\main\\java\\com\\progetto\\dati-erasmus.csv";
 		
 	//Definisco l'elemento separatore
 		final String DELIMITER = ";";
@@ -68,32 +68,31 @@ public class StudentService{
 	        attrb = fileReader.readLine();
 	        String[] attrs = attrb.split(DELIMITER);
 	    //Leggo il file riga per riga e separo gli elementi
-	        for (int i=0; i<500; i++)
+	        for (int i=0; i<1000; i++)
 	        {
 	        	line = fileReader.readLine();
 	        //Prendo tutti gli elementi separati da virgola e li inserisco in array di stringhe
 	            String[] tokens = line.split(DELIMITER);
 	        //Inserisco i valori in nuovi oggetti delle classi modellate
-	            //tokens[17] tokens[30]
-	            Study newstudy = new Study(tokens[20],Double.parseDouble("73.98"),Double.parseDouble("56.78"), Integer.parseInt(tokens[23]));
-	           //(tokens[31])
-	            Placement newplacement = new Placement (tokens[13],tokens[14],tokens[16],tokens[21],Integer.parseInt(tokens[24]),Float.parseFloat("3434.56"),tokens[15].charAt(0),Float.parseFloat(tokens[18]));
+	            Study newstudy = new Study(tokens[20],Double.parseDouble(tokens[17]),Double.parseDouble(tokens[30]), Integer.parseInt(tokens[23]));
+	            Placement newplacement = new Placement (tokens[13],tokens[14],tokens[16],tokens[21],Integer.parseInt(tokens[24]),Float.parseFloat(tokens[31]),tokens[15].charAt(0),Float.parseFloat(tokens[18]));
 	            Institute newinstitute = new Institute (tokens[2],tokens[3],tokens[11],tokens[12]);
 	            Language newlanguage = new Language (tokens[28],tokens[29],tokens[27].charAt(0));
 	            Student newstudent = new Student(tokens[22],tokens[10].charAt(0),tokens[19].charAt(0),Integer.parseInt(tokens[7]),Integer.parseInt(tokens[25]),Float.parseFloat(tokens[26]),tokens[32].charAt(0),newstudy,newplacement,newlanguage,newinstitute,
 	            					tokens[0],tokens[1],tokens[6], tokens[8], Integer.parseInt(tokens[4]), Integer.parseInt(tokens[9]), tokens[5].charAt(0));
 	            students.add(newstudent);
 	        }
-	        Field[] fields = students.get(1).getClass().getFields();
-	        int i=1;
-	        
+	     /* Method[] methods = students.get(1).getClass().getMethods();
+	        Field[] fields = students.get(0).getClass().getFields(); 
+	       // int i=0;
 		    //Prendo l'intestazione di ogni colonna con un foreach e le salvo in un array
-		      /* for(String attr : attrs)
+		       for(Field f: fields)
 		        {	
-		    	   Method m = students.get(1).getClass().getMethod("get"+fields[i].getName().substring(0, 1).toUpperCase()+fields[i].getName().substring(1));
-		           Attribute newattribute = new Attribute(fields[i].getName(),attr,m.getReturnType().toString());		           		           
-		           attributes.add(newattribute);
-		           i++;
+		    	   System.out.println(f.getName());
+		    	   //Method m = students.get(1).getClass().getMethod("get"+fields[i].getName().substring(0, 1).toUpperCase()+fields[i].getName().substring(1));
+		           //Attribute newattribute = new Attribute(fields[i].getName(),attr,m.getReturnType().toString());		           		           
+		           //attributes.add(newattribute);
+		           //i++;
 		        }*/
 	        fileReader.close();
 		}

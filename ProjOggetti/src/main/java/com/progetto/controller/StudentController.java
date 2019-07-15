@@ -1,6 +1,7 @@
-package com.progetto.application;
+package com.progetto.controller;
 import com.progetto.model.Attribute;
 import com.progetto.model.Student;
+import com.progetto.service.StudentService;
 
 import java.net.URI;
 import java.util.List;
@@ -15,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-
 
 @RestController
 public class StudentController {
