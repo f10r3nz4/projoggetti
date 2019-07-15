@@ -18,14 +18,14 @@
 <p></p>
 </body>
 
-localhost:8080/data?filter={"age":{"$not":21}}
-localhost:8080/data?filter={"sh_duration":{"$in":["T","?"]}}
-localhost:8080/data?filter={"studygrant":{"$nin":[0, 1235, 355.84]}}
-localhost:8080/data?filter={"$or":[{"lang_preparation":"EC"},{"lang_preparation":"NN"}]}
-localhost:8080/data?filter={"$or":[{"lang_preparation":"EC"},{"total_credits":30}]}
-localhost:8080/data?filter={"$and":[{"gender":"M"},{"age":21}]}
-localhost:8080/data?filter={"studylength":{"$gt":4}}
-localhost:8080/data?filter={"studycredits":{"$gte":48}}
-localhost:8080/data?filter={"n_years":{"$lt":3}}
-localhost:8080/data?filter={"subject_area":{"$lte":22}}
-localhost:8080/data?filter={"placementgrant":{"$bt":[800,900]}}
+localhost:8080/data?filter={"age":{"$not":21}}<br>
+localhost:8080/data?filter={"sh_duration":{"$in":["T","?"]}}<br>
+localhost:8080/data?filter={"studygrant":{"$nin":[0, 1235, 355.84]}}<br>
+localhost:8080/data?filter={"$or":[{"lang_preparation":"EC"},{"lang_preparation":"NN"}]}<br>
+localhost:8080/data?filter={"$or":[{"lang_preparation":"EC"},{"total_credits":30}]}<br>
+localhost:8080/data?filter={"$and":[{"gender":"M"},{"age":21}]}<br>
+localhost:8080/data?filter={"studylength":{"$gt":4}}<br>
+localhost:8080/data?filter={"studycredits":{"$gte":48}}<br>
+localhost:8080/data?filter={"n_years":{"$lt":3}}<br>
+localhost:8080/data?filter={"subject_area":{"$lte":22}}<br>
+localhost:8080/data?filter={"placementgrant":{"$bt":[800,900]}}<br>
