@@ -13,7 +13,7 @@
 <p>Prima di tutto salviamo i dati in un ArrayList <b>List<Student></b>, inizializzato nel Service all'interno della quale si definisce anche il metodo <b>retrieveAllData</b> e <b>retrieveDataStudent</b> che vengono richiamati dal Controller e servono a prendere le informazioni che vogliamo stampare</p>
 <p>Si possono applicare a <i>/data</i> dei filtri, con la sittassi /data?filter=filtro. Sono stati implementati filtri con operatori sia condizionali che logici e sono specificati di seguito. Questo è possibile perchè è stato specificato un @RequestParam con valore di default nullo.</p>
   <h4>Filters</h4>
-<p>Il metodo <i>doFilter</i>, a seconda dei parametri passategli, va a ricercare il filtro selezionato per poi applicarlo ad ogni elemento all'interno dell'ArrayList. Tutti gli elementi che soddisfano il filtro vengono inseriti in un ulteriore ArrayList per poi stamparli, nel caso sono state richieste le statistiche vengono prima elaborate e poi visualizzate.</p>
+<p>Il metodo <i>doFilter</i>, a seconda dei parametri passatogli, va a ricercare il filtro selezionato per poi applicarlo ad ogni elemento all'interno dell'ArrayList. Tutti gli elementi che soddisfano il filtro vengono inseriti in un ulteriore ArrayList per poi stamparli, nel caso sono state richieste le statistiche vengono prima elaborate e poi visualizzate.</p>
 <p>Visto che i filtri vengono richiamati in due modi diversi:<br>
   {"parametro":{"$nomefiltro":valore}}<br>
   {"$nomefiltro":{"parametro":valore}}<br>
@@ -71,7 +71,7 @@ localhost:8080/statistics?field=nationality&filter={"age":{"$lte":25},"age":{"$n
   <h3>/metadata</h3>
 <p></p>
   <h3>/statistics</h3>
-<p>Nel controller la rotta <i>/statistics</i> chiama il metodo <i>retriveStatistics</i>. Esso gestisce i tipi di dato passategli per il calcolo: per le <b>stringhe</b> e per i <b>char</b> viene restituito solo il conteggio(attraverso il metodo di <i>Student</i>, <i>countString</i>), raggruppato per valore, per i tipi numerici vengono stampati, oltre al loro conteggio(metodo <i>countNum</i> di <i>Student</i>) la media, il minimo e il massimo, la deviazione standard e la somma.</p>
+<p>Nel controller la rotta <i>/statistics</i> chiama il metodo <i>retriveStatistics</i>. Esso gestisce i tipi di dato passatogli per il calcolo: per le <b>stringhe</b> e per i <b>char</b> viene restituito solo il conteggio(attraverso il metodo di <i>Student</i>, <i>countString</i>), raggruppato per valore, per i tipi numerici vengono stampati, oltre al loro conteggio(metodo <i>countNum</i> di <i>Student</i>) la media, il minimo e il massimo, la deviazione standard e la somma.</p>
 <p>Per calcolare una statistica la sintassi, indifferente per ogni tipo, é: /statistics/field=parametro</p>
 <p><i>Esempio:</i> localhost:8080/statistics?field=total_credits<br>
 localhost:8080/statistics?field=lang_taught</p>
