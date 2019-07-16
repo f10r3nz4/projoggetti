@@ -188,6 +188,7 @@ public class StudentService extends Parsing{
 	@SuppressWarnings("finally")
 	public List<Student> doFilter(List<Student> students, String param,String filter) {
 		List<Student> check= new ArrayList<>();
+		String filt;
 		String[] attrs= new String[2]; 
 		JSONObject a;
 		try {
@@ -196,24 +197,29 @@ public class StudentService extends Parsing{
 				a = (JSONObject) JSONValue.parseWithException(param);
 			else 
 				a = (JSONObject) JSONValue.parseWithException(filter);
-			attrs[0]=a.keySet().toString().substring(1,a.keySet().toString().length()-1);
-		//Avvio un controllo sul nome del filtro
-			if(attrs[0].charAt(0)=='$') {
-				Method m=this.getClass().getMethod("filter"+attrs[0], Student.class, String.class);
-				for(Student student:students) {
-					if((boolean)m.invoke(this,student,a.get(attrs[0]).toString().substring(1, a.get(attrs[0]).toString().length()-1)))
-						check.add(student);
+			filt=a.keySet().toString();
+			String[] keys = filt.substring(1,filt.length()-1).split(",");
+			for(String key:keys) {
+				JSONObject c = (JSONObject) a.get(key);
+				System.out.println(c.toString());
+				attrs[0]=c.keySet().toString().substring(1,c.keySet().toString().length()-1);
+			//Avvio un controllo sul nome del filtro
+				if(key.charAt(0)=='$') {
+					Method m=this.getClass().getMethod("filter"+key, Student.class, String.class);
+					for(Student student:students) {
+						if(!check.contains(student)&&(boolean)m.invoke(this,student,c.get(attrs[0]).toString().substring(1, c.get(attrs[0]).toString().length()-1)))
+							check.add(student);
+					}
+				}
+				else {
+					attrs[0]=c.keySet().toString().substring(1,c.keySet().toString().length()-1);
+					Method m=this.getClass().getMethod("filter"+attrs[0],Student.class,String.class,String.class);		
+					for(Student student:students) {
+						if(!check.contains(student)&&(boolean)m.invoke(this,student,key,c.get(attrs[0]).toString()))
+							check.add(student);
+					}
 				}
 			}
-			else {
-				JSONObject b = (JSONObject) (a.get(attrs[0]));
-				attrs[1]=b.keySet().toString().substring(1,b.keySet().toString().length()-1);
-				Method m=this.getClass().getMethod("filter"+attrs[1],Student.class,String.class,String.class);		
-				for(Student student:students) {
-					if((boolean)m.invoke(this,student,attrs[0],b.get(attrs[1]).toString()))
-						check.add(student);
-			}
-		}
 		return check;
 		}catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
