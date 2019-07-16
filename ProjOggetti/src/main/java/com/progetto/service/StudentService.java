@@ -1,6 +1,7 @@
 package com.progetto.service;
 
 import com.progetto.utils.Parsing;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy.PascalCaseStrategy;
 import com.progetto.model.Attribute;
 import com.progetto.model.Institute;
 import com.progetto.model.Language;
@@ -89,20 +90,60 @@ public class StudentService extends Parsing{
 	            					tokens[0],tokens[1],tokens[6], tokens[8], Integer.parseInt(tokens[4]), Integer.parseInt(tokens[9]), tokens[5].charAt(0));
 	            students.add(newstudent);
 	        }
-	        Method[] methods = students.get(1).getClass().getMethods();
-	        int i=0;
+	        Method[] methods = students.get(1).getClass().getDeclaredMethods();
+	        
+	       for(Method m:methods) {
+	        	if(m.getName().substring(0, 3).contains("get")) {
+		        	String alias=m.getName().substring(3).toLowerCase();
+		        	String sourceField=m.getName().substring(3).toUpperCase();
+		        	String returnValue =m.getReturnType().getName();
+		        	Attribute newattribute = new Attribute(alias,sourceField,returnValue);
+					attributes.add(newattribute);
+	        	}
+	        }
+/*	        int i=0;
+	        for(Method m: methods)
+	        {
+	    	   if(m.getName().substring(0, 3).contains("get")) {
+				   Attribute newattribute = new Attribute(m.getName().substring(3).toLowerCase(),attrs[i],m.getReturnType().getName());		           		           
+				   attributes.add(newattribute);
+				   i++;
+	    	   }
+	    	   
+		   }*/
+		    	
+	        	
+	        /*for(Method m:methods) {
+	        	if(m.getName().substring(0, 3).contains("get") && !m.getName().equals("getLanguage") && !m.getName().equals("getInstitute"))
+	        		params.add(m.getName().substring(3).toLowerCase());
+	        }
 	        boolean a;
+	        int i;
 		    //Prendo l'intestazione di ogni colonna con un foreach e le salvo in un array
-		       for(Method m: methods)
+		       for(String attr: attrs)
 		        {
+		    	   String[] values = attr.toLowerCase().split("_");
 		    	   a=true;
-		    	   if(m.getName().substring(0, 3).equals("get")&& !m.getName().contentEquals("getLanguage") && !m.getName().contentEquals("getInstitute") && i<=33) {
-    				   Attribute newattribute = new Attribute(m.getName().substring(3).toLowerCase(),attrs[i],m.getReturnType().toString());		           		           
-    				   attributes.add(newattribute);
-    				   i++;
-    				   a=false;
+		    	   i=0;
+		    	   while(a) {
+		    		   for(String value:values) {
+				    	   if(params.get(i).contains(value) && value!="age" && !value.equals("study")) {
+		    				   Attribute newattribute = new Attribute(params.get(i),attr,"String");		           		           
+		    				   attributes.add(newattribute);
+		    				   a=false;
+		    				   System.out.println(params.get(i));
+		    				   System.out.println(attr);
+		    				   params.remove(i);
+				    	   }else if(attr.equals("NUMB_YRS_HIGER_EDUCAT_VALUE")){
+				    			Attribute newattribute = new Attribute("n_years",attr,"String");
+				    			attributes.add(newattribute);
+				    			a=false;
+				    			params.remove("n_years");
+				    	   }
+		    		   }
+			    	   i++;
 		    	   }
-		        }
+		        }*/
 	        fileReader.close();
 		}
 	//Gestisco le eccezioni
