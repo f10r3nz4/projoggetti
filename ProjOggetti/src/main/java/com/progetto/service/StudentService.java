@@ -40,20 +40,25 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 import ch.qos.logback.core.property.ResourceExistsPropertyDefiner;
 
+/**<p>Si definiscono due ArrayList, uno per gestire i metadati(attributes) e l'altro
+ * per gestire tutti i record del file scaricato.</p>
+ * 
+ * <p>Nella sezione @static effettiuamo il secondo parsing: attraverso un <i>BufferedReader</i> 
+ * apriamo in file in lettura per leggere ogni riga di esso, a questo punto separiamo tutti 
+ * i record per ogni riga attraverso un <b>delimiter</b>.</p>
+ * 
+ * <p>In un ciclo for (consideriamo i primi 1000 record per questioni di efficienza)
+ * andiamo a salvare i dati dentro l'ArrayList precedentemente definito.</p>
+ * 
+ * 
+ */
+
 @Component
 public class StudentService extends Parsing{
 	
 	private static List<Student> students = new ArrayList<>();
 	private static List<Attribute> attributes = new ArrayList<>();
-	
-//Stampa tutti i dati e permette di applicare filtri
-	public List<Student> getStudents(String param) {
-		if(param.isEmpty())
-			return students;
-		else {
-			return doFilter(students,param,"");
-		}
-	}
+
 //Parsing del file scaricato
 	static {
 		//Definisco l'elemento separatore
@@ -115,6 +120,10 @@ public class StudentService extends Parsing{
 			e.printStackTrace();
 		}*/
 	}
+	
+/**<p>Definiamo i metodi che verranno richiamati dal Controller per stampare
+ * i metadati,i dati, i dati filtrati e le statistiche</p>
+ */
 //Restituisce le intestazioni delle colonne
 	public List<Attribute> retrieveDataAttribute(){
         return StudentService.attributes;
@@ -122,7 +131,8 @@ public class StudentService extends Parsing{
 //Restituisce i dati degli studenti con eventuali filtri
 	public List<Student> retrieveDataStudent(String fieldName){
         return this.getStudents(fieldName);
-	} 
+	}
+	
 //Restituisce le statistiche di un attriburo passatogli per parametro
 	@SuppressWarnings("finally")
 	public HashMap<String,Double>retrieveStatistics(String param,String filter){
@@ -161,6 +171,19 @@ public class StudentService extends Parsing{
 			return statistics;
 		}
 	}
+	
+//Stampa tutti i dati e permette di applicare filtri
+	public List<Student> getStudents(String param) {
+		if(param.isEmpty())
+			return students;
+		else {
+			return doFilter(students,param,"");
+		}
+	}
+
+/**
+ *<p>Gestiamo tutti i filtri in modo da richiamarli a seconda dei parametri passati</p>
+ */
 //Gestisco i filtri prendendo 
 	@SuppressWarnings("finally")
 	public List<Student> doFilter(List<Student> students, String param,String filter) {
@@ -342,7 +365,8 @@ public class StudentService extends Parsing{
 	}
 	
 	//Conditional filter operators
-
+	//Controlliamo in ogni filtro se viene passato un tipo numerico o una stringa;
+	//in quest ultimo caso viene stampato un messaggio di errore da terminale
 	@SuppressWarnings("finally")
 	public boolean filter$gt(Student student, String param, String value) {
 		boolean a=false;

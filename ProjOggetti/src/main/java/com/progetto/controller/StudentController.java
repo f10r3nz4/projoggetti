@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+/**
+ * <p>Definiamo le rotte per le interrogazioni su record tramite GET,
+ *  utilizzando i metodi <i>retrive</i> di <b>StudentService</b></p>
+ *
+ */
 @RestController
 public class StudentController {
 

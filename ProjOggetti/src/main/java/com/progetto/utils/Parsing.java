@@ -15,7 +15,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
-
+/** <p>Il primo Parsing trova il link del file da scaricare all'indirizzo richiesto.
+ *  Tramite il metodo <i>download</i> appena viene richiamato il parsing il file viene salvato
+ *  col nome definito, nel path indicato (definito per sistemi Windows)</p>
+ * 
+ *
+ */
 public class Parsing {
 	
 	public static void getParsing()
@@ -64,6 +69,7 @@ public class Parsing {
 			e.printStackTrace();
 		}
 	}
+	
 //Metodo per salvare una copia del file di interesse assegnandogli un nome
 	public static void download(String url, String fileName) throws Exception {
 	    try (InputStream in = URI.create(url).toURL().openStream()) {
