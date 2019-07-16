@@ -64,7 +64,10 @@
 <p>$bt</p>
  <p><i>Forma generale:</i> {"parametro":{"$bt":[valore1,valore2]}}<br> 
     <i>Esempio:</i>localhost:8080/data?filter={"placementgrant":{"$bt":[800,900]}}</p>
-
+<h5>Operatori logici e condizionali combinati</h5>
+<p>Sia con la rotta /data che con la rotta /statistics é possibile applicare più filtri, oltre che combinare un operatore logico con uno condizionale con la sintassi {"parametro":{"$nomefiltro1":valore},"parametro":{"$nomefiltro2":valore},...}</p>
+<p><i>Esempi:</i> localhost:8080/data?filter={"subject_area":{"$lte":38},"$or":[{"lang_preparation":"EC"},{"total_credits":30}]}<br>
+localhost:8080/statistics?field=nationality&filter={"age":{"$lte":25},"age":{"$not":20}}</p>
   <h3>/metadata</h3>
 <p></p>
   <h3>/statistics</h3>
