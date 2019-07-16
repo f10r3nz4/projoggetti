@@ -1,6 +1,5 @@
 package com.progetto.utils;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,9 +16,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
-
 public class Parsing {
-	
 	
 	public static void getParsing()
 	{ 

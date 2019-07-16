@@ -71,52 +71,24 @@ public class Student extends Erasmus{
 		return mobility_code;
 	}
 
-	public void setMobility_code(String mobility_code) {
-		this.mobility_code = mobility_code;
-	}
-
-	public void setID(String iD) {
-		ID = iD;
-	}
-
 	public String getNationality() {
 		return nationality;
-	}
-
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
 	}
 
 	public String getStudy_level() {
 		return study_level;
 	}
 
-	public void setStudy_level(String study_level) {
-		this.study_level = study_level;
-	}
-
 	public int getAge() {
 		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
 	}
 
 	public int getN_years() {
 		return n_years;
 	}
 
-	public void setN_years(int n_years) {
-		this.n_years = n_years;
-	}
-
 	public char getGender() {
 		return gender;
-	}
-
-	public void setGender(char gender) {
-		this.gender = gender;
 	}
 
 	public String getConsortium() {

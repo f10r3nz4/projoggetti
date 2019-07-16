@@ -24,13 +24,6 @@ public abstract class Erasmus {
 	 * ai singoli valori generalizzati nel data-set.
 	 */
 	
-	
-
-	
-	public String getConsortium() {
-		return consortium;
-	}
-
 	public Erasmus(String consortium, char mob_type, char sh_duration, int subject_area, int total_credits,
 			float special_needs, char prev_partecipation, char qualification, Study study, Placement placement,
 			Language language, Institute institute) {
@@ -49,96 +42,52 @@ public abstract class Erasmus {
 		this.institute = institute;
 	}
 
-	public void setConsortium(String consortium) {
-		this.consortium = consortium;
+	public String getConsortium() {
+		return consortium;
 	}
 
 	public char getMob_type() {
 		return mob_type;
 	}
 
-	public void setMob_type(char mob_type) {
-		this.mob_type = mob_type;
-	}
-
 	public char getSh_duration() {
 		return sh_duration;
-	}
-
-	public void setSh_duration(char sh_duration) {
-		this.sh_duration = sh_duration;
 	}
 
 	public int getSubject_area() {
 		return subject_area;
 	}
 
-	public void setSubject_area(int subject_area) {
-		this.subject_area = subject_area;
-	}
-
 	public int getTotal_credits() {
 		return total_credits;
-	}
-
-	public void setTotal_credits(int total_credits) {
-		this.total_credits = total_credits;
 	}
 
 	public float getSpecial_needs() {
 		return special_needs;
 	}
 
-	public void setSpecial_needs(float special_needs) {
-		this.special_needs = special_needs;
-	}
-
 	public char getPrev_partecipation() {
 		return prev_partecipation;
-	}
-
-	public void setPrev_partecipation(char prev_partecipation) {
-		this.prev_partecipation = prev_partecipation;
 	}
 
 	public char getQualification() {
 		return qualification;
 	}
 
-	public void setQualification(char qualification) {
-		this.qualification = qualification;
-	}
-
 	public Study getStudy() {
 		return study;
-	}
-
-	public void setStudy(Study study) {
-		this.study = study;
 	}
 
 	public Placement getPlacement() {
 		return placement;
 	}
 
-	public void setPlacement(Placement placement) {
-		this.placement = placement;
-	}
-
 	public Language getLanguage() {
 		return language;
-	}
-
-	public void setLanguage(Language language) {
-		this.language = language;
 	}
 	
 	public Institute getInstitute() {
 		return institute;
-	}
-
-	public void setInstitute(Institute institute) {
-		this.institute = institute;
 	}
 	
 	public String getStudyStart() {

@@ -22,31 +22,15 @@ public class Study {
 		return start;
 	}
 
-	public void setStart(String start) {
-		this.start = start;
-	}
-
 	public double getLength() {
 		return length;
-	}
-
-	public void setLength(double length) {
-		this.length = length;
 	}
 
 	public double getGrant() {
 		return grant;
 	}
 
-	public void setGrant(double grant) {
-		this.grant = grant;
-	}
-
 	public int getCredits() {
 		return credits;
-	}
-
-	public void setCredits(int credits) {
-		this.credits = credits;
 	}
 }

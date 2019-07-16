@@ -32,65 +32,32 @@ public class Placement {
 	public String getEnterprise() {
 		return enterprise;
 	}
-
-	public void setEnterprise(String enterprise) {
-		this.enterprise = enterprise;
-	}
-
+	
 	public String getCountry() {
 		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
 	}
 
 	public String getSector() {
 		return sector;
 	}
 
-	public void setSector(String sector) {
-		this.sector = sector;
-	}
-
 	public String getStart() {
 		return start;
-	}
-
-	public void setStart(String start) {
-		this.start = start;
 	}
 
 	public int getCredits() {
 		return credits;
 	}
 
-	public void setCredits(int credits) {
-		this.credits = credits;
-	}
-
 	public float getGrant() {
 		return grant;
-	}
-
-	public void setGrant(float grant) {
-		this.grant = grant;
 	}
 
 	public char getSize() {
 		return size;
 	}
 
-	public void setSize(char size) {
-		this.size = size;
-	}
-
 	public float getLength() {
 		return length;
 	}
-
-	public void setLength(float length) {
-		this.length = length;
-	}
-
 }

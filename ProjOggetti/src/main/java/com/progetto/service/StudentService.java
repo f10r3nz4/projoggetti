@@ -348,7 +348,9 @@ public class StudentService extends Parsing{
 		boolean a=false;
 		try {
 			Method m=student.getClass().getMethod("get"+param.substring(0, 1).toUpperCase()+param.substring(1));
-			if(m.getReturnType()!=String.class && Double.parseDouble(m.invoke(student).toString())>Double.parseDouble(value))
+			if(m.getReturnType()==String.class)
+				System.out.println("Cannot compare String values!");
+			else if(Double.parseDouble(m.invoke(student).toString())>Double.parseDouble(value))
 				a = true;
 			return a;
 		}
@@ -369,7 +371,9 @@ public class StudentService extends Parsing{
 		boolean a=false;
 		try {
 			Method m=student.getClass().getMethod("get"+param.substring(0, 1).toUpperCase()+param.substring(1));
-			if(m.getReturnType()!=String.class && Double.parseDouble(m.invoke(student).toString())<Double.parseDouble(value))
+			if(m.getReturnType()==String.class)
+				System.out.println("Cannot compare String values!");
+			else if(Double.parseDouble(m.invoke(student).toString())<Double.parseDouble(value))
 				a = true;
 			return a;
 		}
@@ -390,7 +394,9 @@ public class StudentService extends Parsing{
 		boolean a=false;
 		try {
 			Method m=student.getClass().getMethod("get"+param.substring(0, 1).toUpperCase()+param.substring(1));
-			if(m.getReturnType()!=String.class && Double.parseDouble(m.invoke(student).toString())>=Double.parseDouble(value))
+			if(m.getReturnType()==String.class)
+				System.out.println("Cannot compare String values!");
+			else if(Double.parseDouble(m.invoke(student).toString())>=Double.parseDouble(value))
 				a = true;
 			return a;
 		}
@@ -411,7 +417,9 @@ public class StudentService extends Parsing{
 		boolean a=false;
 		try {
 			Method m=student.getClass().getMethod("get"+param.substring(0, 1).toUpperCase()+param.substring(1));
-			if(m.getReturnType()!=String.class && Double.parseDouble(m.invoke(student).toString())<=Double.parseDouble(value))
+			if(m.getReturnType()==String.class)
+				System.out.println("Cannot compare String values!");
+			else if(Double.parseDouble(m.invoke(student).toString())<=Double.parseDouble(value))
 				a = true;
 			return a;
 		}
@@ -433,7 +441,9 @@ public class StudentService extends Parsing{
 		boolean a=false;
 		try {
 			Method m=student.getClass().getMethod("get"+param.substring(0, 1).toUpperCase()+param.substring(1));
-			if(m.getReturnType()!=String.class && Double.parseDouble(m.invoke(student).toString())>Double.parseDouble(val[0]) && Double.parseDouble(m.invoke(student).toString())>Double.parseDouble(val[1]))
+			if(m.getReturnType()==String.class)
+				System.out.println("Cannot compare String values!");
+			else if(Double.parseDouble(m.invoke(student).toString())>=Double.parseDouble(val[0]) && Double.parseDouble(m.invoke(student).toString())<=Double.parseDouble(val[1]))
 				a = true;
 			return a;
 		}
