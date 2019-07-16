@@ -71,7 +71,7 @@ localhost:8080/statistics?field=nationality&filter={"age":{"$lte":25},"age":{"$n
   <h3>/metadata</h3>
 <p></p>
   <h3>/statistics</h3>
-<p>Nel controller la rotta <i>/statistics</i> chiama il metodo <i>retriveStatistics</i>. Esso gestisce i tipi di dato passategli per il calcolo: per le <br>stringhe</br> e per i <br>char</br> viene restituito solo il conteggio(attraverso il metodo di <i>Student</i>, <i>countString</i>), raggruppato per valore, per i tipi numerici vengono stampati, oltre al loro conteggio(metodo <i>countNum</i> di <i>Student</i>) la media, il minimo e il massimo, la deviazione standard e la somma.</p>
+<p>Nel controller la rotta <i>/statistics</i> chiama il metodo <i>retriveStatistics</i>. Esso gestisce i tipi di dato passategli per il calcolo: per le <b>stringhe</b> e per i <b>char</b> viene restituito solo il conteggio(attraverso il metodo di <i>Student</i>, <i>countString</i>), raggruppato per valore, per i tipi numerici vengono stampati, oltre al loro conteggio(metodo <i>countNum</i> di <i>Student</i>) la media, il minimo e il massimo, la deviazione standard e la somma.</p>
 <p>Per calcolare una statistica la sintassi, indifferente per ogni tipo, é: /statistics/field=parametro</p>
 <p><i>Esempio:</i> localhost:8080/statistics?field=total_credits<br>
 localhost:8080/statistics?field=lang_taught</p>
