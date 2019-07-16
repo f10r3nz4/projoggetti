@@ -152,7 +152,7 @@ public class StudentService extends Parsing{
 				statistics = students.get(0).countString(check,param);
 		//Nel caso di stringa manda l'unico metodo associatovi, se è un tipo numerico chiama i metodi per le statistiche previste
 			else{
-				statistics.put("field:"+param,(double)students.get(0).countNum(check,param));
+				statistics.put(param+" count:",(double)students.get(0).countNum(check,param));
 				statistics.put("avg", students.get(0).avg(check,param));
 				statistics.put("min", students.get(0).min(check,param));
 				statistics.put("max", students.get(0).max(check,param));
