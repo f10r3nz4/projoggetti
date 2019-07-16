@@ -200,7 +200,6 @@ public class StudentService extends Parsing{
 		//Avvio un controllo sul nome del filtro
 			if(attrs[0].charAt(0)=='$') {
 				Method m=this.getClass().getMethod("filter"+attrs[0], Student.class, String.class);
-			//
 				for(Student student:students) {
 					if((boolean)m.invoke(this,student,a.get(attrs[0]).toString().substring(1, a.get(attrs[0]).toString().length()-1)))
 						check.add(student);
