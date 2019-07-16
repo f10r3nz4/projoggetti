@@ -17,3 +17,28 @@
   <h3>/statistics</h3>
 <p></p>
 </body>
+
+localhost:8080/data?filter={"age":{"$not":21}}<br>
+localhost:8080/data?filter={"sh_duration":{"$in":["T","?"]}}<br>
+localhost:8080/data?filter={"studygrant":{"$nin":[0, 1235, 355.84]}}<br>
+localhost:8080/data?filter={"$or":[{"lang_preparation":"EC"},{"lang_preparation":"NN"}]}<br>
+localhost:8080/data?filter={"$or":[{"lang_preparation":"EC"},{"total_credits":30}]}<br>
+localhost:8080/data?filter={"$and":[{"gender":"M"},{"age":21}]}<br>
+localhost:8080/data?filter={"studylength":{"$gt":4}}<br>
+localhost:8080/data?filter={"studycredits":{"$gte":48}}<br>
+localhost:8080/data?filter={"n_years":{"$lt":3}}<br>
+localhost:8080/data?filter={"subject_area":{"$lte":22}}<br>
+localhost:8080/data?filter={"placementgrant":{"$bt":[800,900]}}<br>
+
+localhost:8080/statistics?field=study_level&filter={"host_code":{"$not":"IT"}}<br>
+localhost:8080/statistics?field=age&filter={"placemententerprise":{"$in":["STUDIO ROMOLI","UNIVERSIT? DI ROMA"]}}<br>
+localhost:8080/statistics?field=gender&filter={"placementcountry":{"$nin":["???","IT"]}}<br>
+localhost:8080/statistics?field=placementsector&filter={"$or":[{"gender":"M"},{"placementstart":"Apr-13"}]}<br>
+localhost:8080/statistics?field=placementsector&filter={"$or":[{"placementstart":"Mar-13"},{"placementstart":"Apr-13"}]}<br>
+localhost:8080/statistics?field=mob_type&filter={"$and":[{"host_country":"FI"},{"study_level":1}]}<br>
+localhost:8080/statistics?field=n_years&filter={"total_credits":{"$gt":30}}<br>
+localhost:8080/statistics?field=total_credits&filter={"n_years":{"$gte":2}}<br>
+localhost:8080/statistics?field=Gender&filter={"age":{"$lt":25}}<br>
+localhost:8080/statistics?field=studylength&filter={"subject_area":{"$lte":38}}<br>
+localhost:8080/statistics?field=lang_taught&filter={"age":{"$bt":[20,30]}}<br>
+
