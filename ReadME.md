@@ -11,7 +11,7 @@
   <h3>/data</h3>
 <p>La prima rotta è <i>/data</i> che stampa tutti gli attributti in coppia nome valore, separati per classe d'implementazione.</p>
 <p>Prima di tutto salviamo i dati in un ArrayList <b>List<Student></b>, inizializzato nel Service all'interno della quale si definisce anche il metodo <b>retrieveAllData</b> e <b>retrieveDataStudent</b> che vengono richiamati dal Controller e servono a prendere le informazioni che vogliamo stampare</p>
-<p>Si possono applicare a <i>/data</i> dei filtri, con la sittassi /data?filter=<filtro>. Sono stati implementati filtri con operatori sia condizionali che logici e sono specificati di seguito. Questo è possibile perchè è stato specificato un @RequestParam con valore di default nullo.</p>
+<p>Si possono applicare a <i>/data</i> dei filtri, con la sittassi /data?filter=/<filtro/>. Sono stati implementati filtri con operatori sia condizionali che logici e sono specificati di seguito. Questo è possibile perchè è stato specificato un @RequestParam con valore di default nullo.</p>
   <h4>Filters</h4>
 <p>Il metodo <i>doFilter</i>, a seconda dei parametri passategli, va a ricercare il filtro selezionato per poi applicarlo ad ogni elemento all'interno dell'ArrayList. Tutti gli elementi che soddisfano il filtro vengono inseriti in un ulteriore ArrayList per poi stamparli, nel caso sono state richieste le statistiche vengono prima elaborate e poi visualizzate.</p>
 <p>Visto che i filtri vengono richiamati in due modi diversi:<br>
