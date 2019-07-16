@@ -69,7 +69,7 @@
 <p><i>Esempi:</i> localhost:8080/data?filter={"subject_area":{"$lte":38},"$or":[{"lang_preparation":"EC"},{"total_credits":30}]}<br>
 localhost:8080/statistics?field=nationality&filter={"age":{"$lte":25},"age":{"$not":20}}</p>
   <h3>/metadata</h3>
-<p>Nel controller, la rotta <i>/metadata</i> richiama il metodo dal Service che ci permette di visualizzare la descrizione di ogni record in formato Json. Non è possibile applicare un field oppure un filtro a questa rotta.</p>
+<p>Nel controller, la rotta <i>/metadata</i> richiama con retrieveDataAttribute, metodo dal Service, che ci permette di visualizzare la descrizione di ogni record in formato Json. Si fa uso di una ulteriore classe, Attribute, che contiene il nome ed il tipo del record da stampare. Non è possibile applicare un field oppure un filtro a questa rotta.</p>
   <h3>/statistics</h3>
 <p>Nel controller la rotta <i>/statistics</i> chiama il metodo <i>retriveStatistics</i>. Esso gestisce i tipi di dato passatogli per il calcolo: per le <b>stringhe</b> e per i <b>char</b> viene restituito solo il conteggio(attraverso il metodo di <i>Student</i>, <i>countString</i>), raggruppato per valore, per i tipi numerici vengono stampati, oltre al loro conteggio(metodo <i>countNum</i> di <i>Student</i>) la media, il minimo e il massimo, la deviazione standard e la somma.</p>
 <p>Per calcolare una statistica la sintassi, indifferente per ogni tipo, é: /statistics/field=parametro</p>
