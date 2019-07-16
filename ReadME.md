@@ -2,12 +2,12 @@
 <body>
 <p>Il dataset assegnatoci contiene collegamenti a più file dello stesso argomento - dati sui partecipanti e gli organizzatori di un percorso Erasmus -, della quale tre sono di estensione <i>.csv</i>. La scelta è ricaduta sul file con più righe (il CSV completo presenta quasi 300 000 record, per le stampe e le statistiche abbiamo fatto in modo di visualizzarne solo i primi 1000 per velocizzare ed alleggerire le interrogazioni sul file).</p>
 <p>Per organizzare i dati abbiamo modellato più classi, della quale una astratta. Ognuna di queste racchiude gli attributi dei record che sono stati divisi a seconda del concetto rappresentato (com'è descritto dal seguente diagramma delle classi).
-<img src="doc/casiuso.png"></img>
+<img src="doc/diagrammaclassi.png"></img>
 <p>Tutte saranno istanza della superclasse <b>Student</b>. Tutte queste classi si troveranno nel package <b>model</b>.</p>
 <p>Di seguito riportiamo il diagramma delle sequenze che ha lo scopo di rappresentare l'esecuzione del programma.</p>
-<img src=""></img>
+<img src="doc/diagrammaflusso.png"></img>
 <p>E successivamente si trovano i casi d'uso dell'applicazione.</p>
-<img src=""></img>
+<img src="doc/casiuso.png"></img>
   <h3>/data</h3>
 <p>La prima rotta è <i>/data</i> che stampa tutti gli attributti in coppia nome valore, separati per classe d'implementazione.</p>
 <p>Prima di tutto salviamo i dati in un ArrayList <b>List<Student></b>, inizializzato nel Service all'interno della quale si definisce anche il metodo <b>retrieveAllData</b> e <b>retrieveDataStudent</b> che vengono richiamati dal Controller e servono a prendere le informazioni che vogliamo stampare</p>
