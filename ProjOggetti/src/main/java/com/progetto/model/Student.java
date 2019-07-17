@@ -11,7 +11,7 @@ import java.util.List;
 // import java.math.*;
 
 public class Student extends Erasmus{
-	private String ID;
+	private String id;
 	private String mobility_code;
 	private String nationality;
 	private String study_level;
@@ -50,11 +50,11 @@ public class Student extends Erasmus{
 	
 	public Student(String consortium, char mob_type, char sh_duration, int subject_area, int total_credits,
 			float special_needs, char prev_partecipation, char qualification, Study study, Placement placement, Language language,
-			Institute institute, String iD, String mobility_code, String nationality, String study_level, int age,
+			Institute institute, String id, String mobility_code, String nationality, String study_level, int age,
 			int n_years, char gender) {
 		super(consortium, mob_type, sh_duration, subject_area, total_credits, special_needs, prev_partecipation, qualification, study,
 				placement, language, institute);
-		ID = iD;
+		this.id = id;
 		this.mobility_code = mobility_code;
 		this.nationality = nationality;
 		this.study_level = study_level;
@@ -63,8 +63,8 @@ public class Student extends Erasmus{
 		this.gender = gender;
 	}	
 	
-	public String getID() {
-		return ID;
+	public String getId() {
+		return id;
 	}
 	
 	public String getMobility_code() {

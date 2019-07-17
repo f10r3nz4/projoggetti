@@ -27,6 +27,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;*/
 import java.lang.reflect.*;
 import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -79,71 +83,22 @@ public class StudentService extends Parsing{
 	        for (int i=0; i<1000; i++)
 	        {
 	        	line = fileReader.readLine();
-	        //Prendo tutti gli elementi separati da virgola e li inserisco in array di stringhe
-	            String[] tokens = line.split(DELIMITER);
-	        //Inserisco i valori in nuovi oggetti delle classi modellate
-	            Study newstudy = new Study(tokens[20],Double.parseDouble(tokens[17]),Double.parseDouble(tokens[30]), Integer.parseInt(tokens[23]));
-	            Placement newplacement = new Placement (tokens[13],tokens[14],tokens[16],tokens[21],Integer.parseInt(tokens[24]),Float.parseFloat(tokens[31]),tokens[15].charAt(0),Float.parseFloat(tokens[18]));
-	            Institute newinstitute = new Institute (tokens[2],tokens[3],tokens[11],tokens[12]);
-	            Language newlanguage = new Language (tokens[28],tokens[29],tokens[27].charAt(0));
-	            Student newstudent = new Student(tokens[22],tokens[10].charAt(0),tokens[19].charAt(0),Integer.parseInt(tokens[7]),Integer.parseInt(tokens[25]),Float.parseFloat(tokens[26]),tokens[32].charAt(0),tokens[33].charAt(0),newstudy,newplacement,newlanguage,newinstitute,
-	            					tokens[0],tokens[1],tokens[6], tokens[8], Integer.parseInt(tokens[4]), Integer.parseInt(tokens[9]), tokens[5].charAt(0));
-	            students.add(newstudent);
+	        	students.add(saveRecord(line,DELIMITER));
+	       
 	        }
+	        int i=0;
 	        Method[] methods = students.get(1).getClass().getDeclaredMethods();
-	        
-	       for(Method m:methods) {
-	        	if(m.getName().substring(0, 3).contains("get")) {
-		        	String alias=m.getName().substring(3).toLowerCase();
-		        	String sourceField=m.getName().substring(3).toUpperCase();
-		        	String returnValue =m.getReturnType().getName();
-		        	Attribute newattribute = new Attribute(alias,sourceField,returnValue);
-					attributes.add(newattribute);
-	        	}
-	        }
-/*	        int i=0;
-	        for(Method m: methods)
+	        List<String> ordermethods=new ArrayList<>();
+	        List<String> orderattr =new ArrayList<>();
+	        saveAttributes(methods,ordermethods,orderattr,attrs);
+	        i=0;
+	        for(String attr: orderattr)
 	        {
-	    	   if(m.getName().substring(0, 3).contains("get")) {
-				   Attribute newattribute = new Attribute(m.getName().substring(3).toLowerCase(),attrs[i],m.getReturnType().getName());		           		           
-				   attributes.add(newattribute);
-				   i++;
-	    	   }
-	    	   
-		   }*/
-		    	
-	        	
-	        /*for(Method m:methods) {
-	        	if(m.getName().substring(0, 3).contains("get") && !m.getName().equals("getLanguage") && !m.getName().equals("getInstitute"))
-	        		params.add(m.getName().substring(3).toLowerCase());
+	        	Method m=students.get(1).getClass().getMethod("get"+ordermethods.get(i).substring(0,1).toUpperCase()+ordermethods.get(i).substring(1)); 
+	        	Attribute newattribute = new Attribute(ordermethods.get(i),attr,m.getReturnType().getName());		           		           
+	        	attributes.add(newattribute); 
+	        	i++;
 	        }
-	        boolean a;
-	        int i;
-		    //Prendo l'intestazione di ogni colonna con un foreach e le salvo in un array
-		       for(String attr: attrs)
-		        {
-		    	   String[] values = attr.toLowerCase().split("_");
-		    	   a=true;
-		    	   i=0;
-		    	   while(a) {
-		    		   for(String value:values) {
-				    	   if(params.get(i).contains(value) && value!="age" && !value.equals("study")) {
-		    				   Attribute newattribute = new Attribute(params.get(i),attr,"String");		           		           
-		    				   attributes.add(newattribute);
-		    				   a=false;
-		    				   System.out.println(params.get(i));
-		    				   System.out.println(attr);
-		    				   params.remove(i);
-				    	   }else if(attr.equals("NUMB_YRS_HIGER_EDUCAT_VALUE")){
-				    			Attribute newattribute = new Attribute("n_years",attr,"String");
-				    			attributes.add(newattribute);
-				    			a=false;
-				    			params.remove("n_years");
-				    	   }
-		    		   }
-			    	   i++;
-		    	   }
-		        }*/
 	        fileReader.close();
 		}
 	//Gestisco le eccezioni
@@ -153,15 +108,49 @@ public class StudentService extends Parsing{
 		catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}/* catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 	}
 	
+	//Salva un record del dataset
+	public static Student saveRecord(String line, String delimiter){
+		 //Prendo tutti gli elementi separati da virgola e li inserisco in array di stringhe
+        String[] tokens = line.split(delimiter);
+        //Inserisco i valori in nuovi oggetti delle classi modellate
+        Study newstudy = new Study(tokens[20],Double.parseDouble(tokens[17]),Double.parseDouble(tokens[30]), Integer.parseInt(tokens[23]));
+        Placement newplacement = new Placement (tokens[13],tokens[14],tokens[16],tokens[21],Integer.parseInt(tokens[24]),Float.parseFloat(tokens[31]),tokens[15].charAt(0),Float.parseFloat(tokens[18]));
+        Institute newinstitute = new Institute (tokens[2],tokens[3],tokens[11],tokens[12]);
+        Language newlanguage = new Language (tokens[28],tokens[29],tokens[27].charAt(0));
+        Student newstudent = new Student(tokens[22],tokens[10].charAt(0),tokens[19].charAt(0),Integer.parseInt(tokens[7]),Integer.parseInt(tokens[25]),Float.parseFloat(tokens[26]),tokens[32].charAt(0),tokens[33].charAt(0),newstudy,newplacement,newlanguage,newinstitute,
+        					tokens[0],tokens[1],tokens[6], tokens[8], Integer.parseInt(tokens[4]), Integer.parseInt(tokens[9]), tokens[5].charAt(0));
+        return newstudent;
+	}
+	
+	//Salva tutti gli attributi
+	public static void saveAttributes(Method[] methods,List<String> ordermethods,List<String> orderattr, String[] attrs) {
+		for(String attr:attrs) {
+			//eseguo lo split del sourceField
+        	String[] checks=attr.toLowerCase().split("_");
+        	for(Method m:methods) {
+        		//Ricerco l'alias corrispondente al suo sourceField
+        		for(String check:checks) {
+        			//Controllo che l alias corrente sia corretto
+		        	if(m.getName().substring(0, 3).contains("get") && !m.getName().equals("getLanguage") && !m.getName().equals("getInstitute")) {
+		        		//Controllo che non siano inseriti alias e sourceField multipli
+		        		if(!orderattr.contains(attr) && !ordermethods.contains(m.getName().substring(3).toLowerCase())) {
+		        			//Allineo gli alias e i sourceField in due ArrayList distinti
+		        			if(m.getName().substring(3).toLowerCase().contains(check) && !check.equals("study") && !check.equals("placement")) {
+		        				orderattr.add(attr);
+		    	        		ordermethods.add(m.getName().substring(3).toLowerCase());
+		        			}
+		        		}
+		        	}
+	        	}
+        	}
+        }
+	}
 /**<p>Definiamo i metodi che verranno richiamati dal Controller per stampare
  * i metadati,i dati, i dati filtrati e le statistiche</p>
  */
@@ -232,20 +221,26 @@ public class StudentService extends Parsing{
 		String filt;
 		String[] attrs= new String[2]; 
 		JSONObject a;
+		//esecuzione del filtro
 		try {
+			/*controllo se la richiesta é stata fatta tramite rotta /data(si estrae il filtro da param) 
+			 * o /statistics(in quel caso filter contiene le informazioni sul filtro)*/
 			if(filter.isEmpty())
 			//Prendo le informazioni sul filtro da applicare dalla barra di ricerca
 				a = (JSONObject) JSONValue.parseWithException(param);
 			else 
 				a = (JSONObject) JSONValue.parseWithException(filter);
 			filt=a.keySet().toString();
+			/*effettuo lo split sulla sottostringa da 1 alla lunghezza massima -1 per 
+			 * omettete le parentesi quadre presenti nella sintassi*/
 			String[] keys = filt.substring(1,filt.length()-1).split(",");
 			for(String key:keys) {
 				JSONObject c = (JSONObject) a.get(key);
 				System.out.println(c.toString());
 				attrs[0]=c.keySet().toString().substring(1,c.keySet().toString().length()-1);
-			//Avvio un controllo sul nome del filtro
+			//Avvio un controllo sulla tipologia di filtro
 				if(key.charAt(0)=='$') {
+					//Selezione del filtro desiderato
 					Method m=this.getClass().getMethod("filter"+key, Student.class, String.class);
 					for(Student student:students) {
 						if(!check.contains(student)&&(boolean)m.invoke(this,student,c.get(attrs[0]).toString().substring(1, c.get(attrs[0]).toString().length()-1)))
@@ -253,6 +248,7 @@ public class StudentService extends Parsing{
 					}
 				}
 				else {
+					//Selezione del filtro desiderato
 					attrs[0]=c.keySet().toString().substring(1,c.keySet().toString().length()-1);
 					Method m=this.getClass().getMethod("filter"+attrs[0],Student.class,String.class,String.class);		
 					for(Student student:students) {
