@@ -1,7 +1,7 @@
 package com.progetto.service;
 
 import com.progetto.utils.Parsing;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.PascalCaseStrategy;
+
 import com.progetto.model.Attribute;
 import com.progetto.model.Institute;
 import com.progetto.model.Language;
@@ -9,41 +9,17 @@ import com.progetto.model.Placement;
 import com.progetto.model.Student;
 import com.progetto.model.Study;
 
-/*import java.math.BigInteger;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.security.SecureRandom;*/
 import java.util.ArrayList;
-//import java.util.Arrays;
 import java.util.List;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-/*import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;*/
 import java.lang.reflect.*;
 import java.util.HashMap;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import org.json.simple.parser.ParseException;
-/*import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.ParseException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;*/
 import org.springframework.stereotype.Component;
-import org.springframework.web.server.ResponseStatusException;
-import ch.qos.logback.core.property.ResourceExistsPropertyDefiner;
 
 /**<p>Si definiscono due ArrayList, uno per gestire i metadati(attributes) e l'altro
  * per gestire tutti i record del file scaricato.</p>
@@ -63,7 +39,10 @@ public class StudentService extends Parsing{
 	
 	private static List<Student> students = new ArrayList<>();
 	private static List<Attribute> attributes = new ArrayList<>();
-
+	
+	//Limitatore delle righe estratte dal dataset
+	private static final int LIMIT=1000;
+	
 //Parsing del file scaricato
 	static {
 		//Definisco l'elemento separatore
@@ -72,7 +51,7 @@ public class StudentService extends Parsing{
 		{
 		//Prendo il file dove effettuare il parsing e inizializzo un BufferedReader
 			getParsing();
-			String fileToParse = "C:\\Users\\user\\git\\projoggetti\\ProjOggetti\\src\\main\\java\\com\\progetto\\dati-erasmus.csv";
+			String fileToParse = "dati-erasmus.csv";
 		//Creo il FileReader
 			String line = "";
 			String attrb = "";
@@ -80,7 +59,7 @@ public class StudentService extends Parsing{
 	        attrb = fileReader.readLine();
 	        String[] attrs = attrb.split(DELIMITER);
 	    //Leggo il file riga per riga e separo gli elementi
-	        for (int i=0; i<1000; i++)
+	        for (int i=0; i<LIMIT; i++)
 	        {
 	        	line = fileReader.readLine();
 	        	students.add(saveRecord(line,DELIMITER));
@@ -137,7 +116,7 @@ public class StudentService extends Parsing{
         		//Ricerco l'alias corrispondente al suo sourceField
         		for(String check:checks) {
         			//Controllo che l alias corrente sia corretto
-		        	if(m.getName().substring(0, 3).contains("get") && !m.getName().equals("getLanguage") && !m.getName().equals("getInstitute")) {
+		        	if(m.getName().substring(0, 3).contains("get")) {
 		        		//Controllo che non siano inseriti alias e sourceField multipli
 		        		if(!orderattr.contains(attr) && !ordermethods.contains(m.getName().substring(3).toLowerCase())) {
 		        			//Allineo gli alias e i sourceField in due ArrayList distinti
@@ -153,11 +132,17 @@ public class StudentService extends Parsing{
 	}
 /**<p>Definiamo i metodi che verranno richiamati dal Controller per stampare
  * i metadati,i dati, i dati filtrati e le statistiche</p>
+ * 
+ * @return lista di attributi
  */
 //Restituisce le intestazioni delle colonne
 	public List<Attribute> retrieveDataAttribute(){
         return StudentService.attributes;
-	} 
+	}
+
+/**@param fieldName filtro
+ * @return ArrayList di studenti
+ */
 //Restituisce i dati degli studenti con eventuali filtri
 	public List<Student> retrieveDataStudent(String fieldName){
         return this.getStudents(fieldName);
@@ -213,6 +198,10 @@ public class StudentService extends Parsing{
 
 /**
  *<p>Gestiamo tutti i filtri in modo da richiamarli a seconda dei parametri passati</p>
+ * @param students ArrayList di studenti
+ * @param param valore di filter di /data
+ * @param filter valore di filter di /statistics
+ * @return ArrayList di studenti filtrato
  */
 //Gestisco i filtri prendendo 
 	@SuppressWarnings("finally")
@@ -236,7 +225,6 @@ public class StudentService extends Parsing{
 			String[] keys = filt.substring(1,filt.length()-1).split(",");
 			for(String key:keys) {
 				JSONObject c = (JSONObject) a.get(key);
-				System.out.println(c.toString());
 				attrs[0]=c.keySet().toString().substring(1,c.keySet().toString().length()-1);
 			//Avvio un controllo sulla tipologia di filtro
 				if(key.charAt(0)=='$') {

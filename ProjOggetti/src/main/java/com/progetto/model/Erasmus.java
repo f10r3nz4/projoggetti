@@ -22,8 +22,20 @@ public abstract class Erasmus {
 	 * Chiamiamo il <b>costruttore</b> con super(), in quanto Erasmus andrà poi ad estendere la macro-classe Student.
 	 * Oltre al costruttore ed un toString di controllo finale, implementiamo il get ed i set con particolare attenzione
 	 * ai singoli valori generalizzati nel data-set.
+	 * 
+	 * @param consortium CONSORTIUM_AGREEMENT_NUMBER
+	 * @param mob_type MOBILITY_TYPE
+	 * @param sh_duration SHORT_DURATION_CDE
+	 * @param subject_area STUDENT_SUBJECT_AREA
+	 * @param total_credits TOTAL_ECTS_CREDITS_AMT
+	 * @param special_needs SPECIAL_NEEDS_SUPPLEMENT_VALUE
+	 * @param prev_partecipation PREVIOUS_PARTECIPATION CDE
+	 * @param qualification QUALIFICATION_AT_HOST_CDE
+	 * @param study Classe Study
+	 * @param placement Classe Placement
+	 * @param language Classe Language
+	 * @param institute Classe Institute
 	 */
-	
 	public Erasmus(String consortium, char mob_type, char sh_duration, int subject_area, int total_credits,
 			float special_needs, char prev_partecipation, char qualification, Study study, Placement placement,
 			Language language, Institute institute) {

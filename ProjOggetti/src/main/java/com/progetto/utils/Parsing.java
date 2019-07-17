@@ -73,7 +73,7 @@ public class Parsing {
 //Metodo per salvare una copia del file di interesse assegnandogli un nome
 	public static void download(String url, String fileName) throws Exception {
 	    try (InputStream in = URI.create(url).toURL().openStream()) {
-	        Files.copy(in, Paths.get("src\\main\\java\\com\\progetto\\"+fileName));
+	        Files.copy(in, Paths.get(fileName));
 	    }
 	}
 }

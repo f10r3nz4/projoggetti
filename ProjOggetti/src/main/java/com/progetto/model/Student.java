@@ -23,26 +23,27 @@ public class Student extends Erasmus{
 	 * 
 	 * <p>-Parametri ereditati da Erasmus
 	 * 
-	 * @param consortium
-	 * @param mob_type
-	 * @param sh_duration
-	 * @param subject_area
-	 * @param total_credits
-	 * @param special_needs
-	 * @param prev_partecipation
-	 * @param study
-	 * @param placement
-	 * @param language
-	 * @param institute</p>
+	 * @param consortium CONSORTIUM_AGREEMENT_NUMBER
+	 * @param mob_type MOBILITY_TYPE
+	 * @param sh_duration SHORT_DURATION_CDE
+	 * @param subject_area STUDENT_SUBJECT_AREA
+	 * @param total_credits TOTAL_ECTS_CREDITS_AMT
+	 * @param special_needs SPECIAL_NEEDS_SUPPLEMENT_VALUE
+	 * @param prev_partecipation PREVIOUS_PARTECIPATION CDE
+	 * @param qualification QUALIFICATION_AT_HOST_CDE
+	 * @param study Classe Study
+	 * @param placement Classe Placement
+	 * @param language Classe Language
+	 * @param institute Classe Institute</p>
 	 * 
 	 * <p>-Parametri di Studente
-	 * @param iD
-	 * @param mobility_code
-	 * @param nationality
-	 * @param study_level
-	 * @param age
-	 * @param n_years
-	 * @param gender</p>
+	 * @param id STUDENT_ID
+	 * @param mobility_code ID_MOBILITY_CDE
+	 * @param nationality STUDENT_NATIONALITY_CDE
+	 * @param study_level STUDENT_STUDY_LEVEL_CDE
+	 * @param age STUDENT_AGE_VALUE
+	 * @param n_years NUM_YRS_HIGER_EDUCAT_VALUE
+	 * @param gender STUDENT_GENDER_CDE</p>
 	 * 
 	 * Abbiamo poi implementato i vari get e set sia della classe che della superclasse.
 	 */
@@ -204,13 +205,12 @@ public class Student extends Erasmus{
 	 * 
 	 * Metodo <b><i>countString</i></b>
 	 * <p>Conta tutti i valori di @param request di tipo stringa di ogni Student di 
-	 * @param student suddividendoli per valore e restituendo una HashMap di essi
+	 * student suddividendoli per valore e restituendo una HashMap di essi
 	 * 
-	 * @param student
-	 * @param request
-	 * @return</p>
-	 * 
-	 * 
+	 * @param student ArrayList di studenti
+	 * @param request Attributo da contare
+	 * @return HashMap che hanno come nome i valori dell'attributo e come valore il
+	 * conteggio delle volte che compaiono nel dataset</p>
 	 */
 	
 	//il metodo effettua il conteggio delle parole dell'attributo, viene richiamato dal main
@@ -255,11 +255,11 @@ public class Student extends Erasmus{
 	/**
 	 * Metodo <b><i>countNum</i></b>
 	 * <p>Conta tutti i valori di @param requestdi tipo numerico di ogni Student di 
-	 * @param student suddividendoli per valore e restituendo una HashMap di essi
+	 * student suddividendoli per valore e restituendo una HashMap di essi
 	 * 
-	 * @param student
-	 * @param request
-	 * @return</p>
+	 * @param student ArrayList di studenti
+	 * @param request Attributo da contare
+	 * @return Conteggio dell'attributo</p>
 	 */
 	@SuppressWarnings("finally")
 	public int countNum(List<Student> student,String request){
@@ -294,9 +294,9 @@ public class Student extends Erasmus{
 	 * Metodo <b><i>sum</i></b>
 	 * <p>Calcola la somma dei valori di @param request di ogni Student di @param student
 	 * 
-	 * @param student
-	 * @param request
-	 * @return</p>
+	 * @param student ArrayList di studenti
+	 * @param request Attributo con valori da sommare
+	 * @return Somma dei valori dell'attributo</p>
 	 */
 	@SuppressWarnings("finally")
 	public double sum(List<Student> student,String request) {
@@ -330,9 +330,9 @@ public class Student extends Erasmus{
 	 * Metodo <b><i>max</i></b>
 	 * <p>Trova il valore massimo di @param request di ogni Student di @param student
 	 * 
-	 * @param student
-	 * @param request
-	 * @return</p>
+	 * @param student ArrayList di studenti
+	 * @param request Attributo da controllare
+	 * @return Il valore massimo dell'elemento</p>
 	 */
 	@SuppressWarnings("finally")
 	public double max(List<Student> student,String request) {
@@ -368,9 +368,9 @@ public class Student extends Erasmus{
 	 * 
 	 * <p>Trova il valore minimo di @param request di ogni Student di @param student
 	 * 
-	 * @param student
-	 * @param request
-	 * @return</p>
+	 * @param student ArrayList di studenti
+	 * @param request Attributo da controllare
+	 * @return Il valore minimo dell'elemento</p>
 	 */
 	@SuppressWarnings("finally")
 	public double min(List<Student> student,String request) {
@@ -405,9 +405,9 @@ public class Student extends Erasmus{
 	 * 
 	 * <p>Calcola la media dei valori di @param request di ogni Student di @param student
 	 * 
-	 * @param student
-	 * @param request
-	 * @return</p>
+	 * @param student ArrayList di studenti
+	 * @param request Attributo da controllare
+	 * @return La media dei valori dell'elemento</p>
 	 */
 	public double avg(List<Student> student,String request) {
 		double sum=this.sum(student,request);
@@ -422,9 +422,9 @@ public class Student extends Erasmus{
 	 * <p>Calcola la deviazione standard dei valori di @param request di ogni Student 
 	 * di @param student
 	 * 
-	 * @param student
-	 * @param request
-	 * @return</p>
+	 * @param student ArrayList di studenti
+	 * @param request Attributo da controllare
+	 * @return La deviazione standard dei valori dell'elemento</p>
 	 */
 	@SuppressWarnings("finally")
 	public double dev_std(List<Student> student,String request) {
